@@ -1,91 +1,107 @@
-
-{% load static %}
-<footer class="footer py-4">
-  <div class="container">
-    <div class="row">
-        <!-- Logo and copyright -->
-        <div class="col-lg-3 col-sm-12 mb-4">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'images/logo.png'%}" height="35" alt="Logo">
-            </a>
-            <p class="mt-2">
-              Your trusted partner for quality products and exceptional service. We deliver excellence in every purchase.
-            </p>
-        </div>                
-        <!-- Store links -->
-        <div class="col-6 col-sm-4 col-lg-2 mb-3">
-            <h6 class="fw-bold mb-3">Store</h6>
-            <ul class="list-unstyled">
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">About us</a></li>
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Find store</a></li>
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Categories</a></li>
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Blogs</a></li>
-            </ul>
-        </div>               
-        <!-- Information links -->
-        <div class="col-6 col-sm-4 col-lg-2 mb-3">
-            <h6 class="fw-bold mb-3">Information</h6>
-            <ul class="list-unstyled">
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Help center</a></li>
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Money refund</a></li>
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Shipping info</a></li>
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Refunds</a></li>
-            </ul>
-        </div>               
-        <!-- Support links -->
-        <div class="col-6 col-sm-4 col-lg-2 mb-3">
-            <h6 class="fw-bold mb-3">Support</h6>
-            <ul class="list-unstyled">
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Help center</a></li>
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Documents</a></li>
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Account restore</a></li>
-                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">My orders</a></li>
-            </ul>
-        </div>               
-        <!-- Newsletter -->
-        <div class="col-lg-3 col-sm-12 mb-3">
-            <h6 class="fw-bold mb-3">Newsletter</h6>
-            <p class="text-muted">Stay in touch with latest updates about our products and offers</p>
-            <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Email">
-                <button class="btn btn-outline-secondary" type="button">
-                    Join
-                </button>
+<footer class="footer">
+    <div class="container">
+        <div class="row section-padding">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="footer-brand">
+                    <a href="{% url 'home' %}" class="text-decoration-none">
+                        <h5 class="footer-title d-flex align-items-center">
+                            <i class="fas fa-bicycle me-2"></i>BuyBike
+                        </h5>
+                    </a>
+                    <p class="mb-4">Your trusted partner for quality cycling products and exceptional service. We deliver excellence in every purchase.</p>
+                    
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/BeBike-Store-100847359323133" class="social-icon" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-2 col-md-6 col-6 mb-4">
+                <h6 class="footer-title">Store</h6>
+                <ul class="list-unstyled footer-links">
+                    <li class="mb-2"><a href="#" class="footer-link"><i class="fas fa-chevron-right me-2"></i>About Us</a></li>
+                    <li class="mb-2"><a href="#" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Find Store</a></li>
+                    <li class="mb-2"><a href="#" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Categories</a></li>
+                    <li class="mb-2"><a href="#" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Blog</a></li>
+                    <li class="mb-2"><a href="#" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Careers</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-2 col-md-6 col-6 mb-4">
+                <h6 class="footer-title">Support</h6>
+                <ul class="list-unstyled footer-links">
+                    <li class="mb-2"><a href="#" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Help Center</a></li>
+                    <li class="mb-2"><a href="#" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Shipping Info</a></li>
+                    <li class="mb-2"><a href="#" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Returns & Refunds</a></li>
+                    <li class="mb-2"><a href="#" class="footer-link"><i class="fas fa-chevron-right me-2"></i>My Orders</a></li>
+                    <li class="mb-2"><a href="#" class="footer-link"><i class="fas fa-chevron-right me-2"></i>Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h6 class="footer-title">Stay Connected</h6>
+                <p class="mb-3">Subscribe to our newsletter for exclusive deals, cycling tips, and product updates.</p>
+                
+                <div class="newsletter-form">
+                    <form class="mb-4">
+                        <div class="input-group">
+                            <input type="email" class="form-control newsletter-input" placeholder="Enter your email address" required>
+                            <button class="btn btn-accent-custom newsletter-btn" type="submit">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="payment-methods">
+                    <h6 class="footer-title mb-3">We Accept</h6>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <i class="fab fa-cc-visa fa-2x text-muted"></i>
+                        <i class="fab fa-cc-mastercard fa-2x text-muted"></i>
+                        <i class="fab fa-cc-paypal fa-2x text-muted"></i>
+                        <i class="fab fa-cc-amex fa-2x text-muted"></i>
+                        <i class="fab fa-cc-discover fa-2x text-muted"></i>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>         
-    <div class="border-top pt-4">
-        <div class="d-flex justify-content-between">
-            <!-- Payment methods -->
-            <div>
-                <i class="fab fa-cc-visa fa-lg me-2 text-muted"></i>
-                <i class="fab fa-cc-amex fa-lg me-2 text-muted"></i>
-                <i class="fab fa-cc-mastercard fa-lg me-2 text-muted"></i>
-                <i class="fab fa-cc-paypal fa-lg me-2 text-muted"></i>
-            </div>                   
-            <!-- Language selector -->
-            <div class="dropdown">
-                <a class="dropdown-toggle text-decoration-none text-dark" href="#" role="button" data-bs-toggle="dropdown">
-                    <span class="flag-united-kingdom flag me-1"></span>English
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <a class="dropdown-item" href="#">
-                            <span class="flag-united-kingdom flag me-1"></span>English
-                        </a>
-                    </li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#"><span class="flag-poland flag me-1"></span>Polski</a></li>
-                    <li><a class="dropdown-item" href="#"><span class="flag-china flag me-1"></span>中文</a></li>
-                    <li><a class="dropdown-item" href="#"><span class="flag-japan flag me-1"></span>日本語</a></li>
-                    <li><a class="dropdown-item" href="#"><span class="flag-germany flag me-1"></span>Deutsch</a></li>
-                    <li><a class="dropdown-item" href="#"><span class="flag-france flag me-1"></span>Français</a></li>
-                    <li><a class="dropdown-item" href="#"><span class="flag-spain flag me-1"></span>Español</a></li>
-                    <li><a class="dropdown-item" href="#"><span class="flag-russia flag me-1"></span>Русский</a></li>
-                    <li><a class="dropdown-item" href="#"><span class="flag-portugal flag me-1"></span>Português</a></li>
-                </ul>
+        
+        <div class="footer-bottom">
+            <div class="row">
+                <div class="col-12">
+                    <hr class="footer-divider">
+                    <div class="d-flex justify-content-between align-items-center flex-wrap">
+                        <div class="copyright">
+                            <p class="mb-0">
+                                <i class="fas fa-copyright me-1"></i>2025 BuyBike. All rights reserved. | 
+                                <a href="#" class="footer-link">Privacy Policy</a> | 
+                                <a href="#" class="footer-link">Terms of Service</a>
+                            </p>
+                        </div>
+                        
+                        <div class="language-selector">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle footer-link d-flex align-items-center" href="#" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-globe me-2"></i><span>English</span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item active" href="#"><i class="fas fa-flag-usa me-2"></i>English</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-flag me-2"></i>Español</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-flag me-2"></i>Français</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-flag me-2"></i>Deutsch</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-  </div>
 </footer>

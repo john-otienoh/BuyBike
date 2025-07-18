@@ -1,65 +1,199 @@
-<!-- main navbar template -->
-<li class="collapse navbar-collapse" id="main-nav">
-    <ul class="navbar-nav w-auto mx-auto">
-        <!-- home -->
-        <li class="nav-item d-block d-md-none">
-            <li class="nav-item d-block d-md-none">
-                <a class="logo-font font-weight-bold nav-link text-black mr-5" href="{% url 'home' %}" id="home-link" aria-label="Home">
-                    Home
-                </a>
-            </li>
-        </li>
-        <!-- All products -->
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="All Products">
-                All Products
-            </a>
-            <!-- All products by filter -->
-            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                <a href="{ url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
-                <a href="{ url 'products' %}?sort=rating&direction=desc" class="dropdown-item ">By Rating</a>
-                <a href="{ url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By Category</a>
-                <a href="{ url 'products' %}" class="dropdown-item">All Products</a>
+<div class="main-navigation">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav me-auto">
+                    <!-- Home -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">
+                            <i class="fas fa-home me-1"></i>
+                            Home
+                        </a>
+                    </li>
+                    
+                    <!-- Products Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bicycle me-1"></i>
+                            Products
+                        </a>
+                        <ul class="dropdown-menu mega-menu">
+                            <li class="dropdown-header">
+                                <i class="fas fa-bicycle me-2"></i>
+                                Bike Categories
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-mountain me-2"></i>
+                                    Mountain Bikes
+                                    <span class="badge bg-secondary ms-auto">New</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-road me-2"></i>
+                                    Road Bikes
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-bolt me-2"></i>
+                                    Electric Bikes
+                                    <span class="badge bg-success ms-auto">Popular</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-child me-2"></i>
+                                    Kids Bikes
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li class="dropdown-header">
+                                <i class="fas fa-tools me-2"></i>
+                                Accessories
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-hard-hat me-2"></i>
+                                    Helmets & Safety
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-tshirt me-2"></i>
+                                    Apparel
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-wrench me-2"></i>
+                                    Tools & Maintenance
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Brands -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="brandsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-star me-1"></i>
+                            Brands
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-award me-2"></i>
+                                    Trek
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-award me-2"></i>
+                                    Specialized
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-award me-2"></i>
+                                    Giant
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-award me-2"></i>
+                                    Cannondale
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-list me-2"></i>
+                                    View All Brands
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Services -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-tools me-1"></i>
+                            Services
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-wrench me-2"></i>
+                                    Bike Repair
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cog me-2"></i>
+                                    Bike Maintenance
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-search me-2"></i>
+                                    Bike Fitting
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-shipping-fast me-2"></i>
+                                    Assembly Service
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- About -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-info-circle me-1"></i>
+                            About
+                        </a>
+                    </li>
+                    
+                    <!-- Contact -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-envelope me-1"></i>
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Right Side Items -->
+                <ul class="navbar-nav ms-auto">
+                    <!-- Special Offers -->
+                    <li class="nav-item">
+                        <a class="nav-link special-offer" href="#">
+                            <i class="fas fa-fire me-1"></i>
+                            <span class="d-none d-lg-inline">Special Offers</span>
+                            <span class="badge bg-danger ms-1">Hot</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Store Locator -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-map-marker-alt me-1"></i>
+                            <span class="d-none d-lg-inline">Store Locator</span>
+                        </a>
+                    </li>
+                    
+                    <!-- Help -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-question-circle me-1"></i>
+                            <span class="d-none d-lg-inline">Help</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </li>
-        <!-- bike -->
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="bike-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Bike">
-                Bike
-            </a>
-            <!-- bike  categories -->
-            <div class="dropdown-menu border-0" aria-labelledby="bike-link">
-                <a href="{ url 'products' %}?category=e_bike" class="dropdown-item" aria-label="e-bike">e-bike</a>
-                <a href="{ url 'products' %}?category=mountain" class="dropdown-item" aria-label="Mountain">Mountain</a>
-                <a href="{ url 'products' %}?category=race" class="dropdown-item" aria-label="Race">Race</a>
-                <a href="{ url 'products' %}?category=transport" class="dropdown-item" aria-label="Transport">Transport</a>
-
-            </div>
-        </li>
-        <!-- Accessories categories -->
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black mr-5" href="#" id="riding-gear-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Accessories
-            </a>
-            <!-- Accessories categories -->
-            <div class="dropdown-menu border-0" aria-labelledby="riding-gear-link">
-                <a href="{ url 'products' %}?category=parts" class="dropdown-item" aria-label="Parts">Parts</a>
-                <a href="{ url 'products' %}?category=cloths" class="dropdown-item" aria-label="Cloths">Cloths</a>
-                <a href="{ url 'products' %}?category=accessories" class="dropdown-item" aria-label="Accessories">Accessories</a>
-            </div>
-        </li>
-        <!-- Special Offers categories -->
-        <li class="nav-item dropdown">
-            <a class="logo-font font-weight-bold nav-link text-black" href="#" id="specials-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Special Offers">
-                Special Offers
-            </a>
-            <!-- Special Offers categories -->
-            <div class="dropdown-menu border-0" aria-labelledby="specials-link">
-                <a href="{ url 'products' %}?category=new_arrivals" class="dropdown-item" aria-label="New Arrivals">New Arrivals</a>
-                <a href="{ url 'products' %}?category=deals" class="dropdown-item" aria-label="Deals">Deals</a>
-                <a href="{ url 'products' %}?category=clearance" class="dropdown-item" aria-label="Clearance">Clearance</a>
-                <a href="{ url 'products' %}?category=new_arrivals,deals,clearance" class="dropdown-item" aria-label="All Specials">All Specials</a>
-            </div>
-        </li>
-    </ul>
-</li>
+        </nav>
+    </div>
+</div>

@@ -1,57 +1,109 @@
-<!-- top heder for mobile view template -->
-<li class="list-inline-item">
-    <!-- search -->
-    <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <div class="text-center">
-            <div><i class="fas fa-search fa-lg"></i></div>
-            <p class="my-0">Search</p>
-        </div>
-    </a>
-    <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
-        <form class="form" method="GET" action="{ url 'products' %}">
-            <div class="input-group w-100">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+<div class="mobile-header d-lg-none">
+    <div class="container-fluid">
+        <div class="row align-items-center py-2">
+            <div class="col-6">
+                <a href="{% url 'home' %}" class="mobile-brand d-flex align-items-center text-decoration-none">
+                    <i class="fas fa-bicycle me-2 text-primary-custom"></i>
+                    <span class="fw-bold text-primary-custom">BuyBike</span>
+                </a>
             </div>
-        </form>
-    </div>
-</li>
-<!-- my account -->
-<li class="list-inline-item dropdown">
-    <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="My Account">
-        <div class="text-center">
-            <div><i class="fa fa-user-circle-o fa-lg"></i></div>
-            <p class="my-0">My Account</p>
+            
+            <div class="col-6 d-flex justify-content-end align-items-center">
+                <button class="btn btn-link mobile-search-toggle me-2" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSearch">
+                    <i class="fas fa-search text-primary-custom"></i>
+                </button>
+                
+                <div class="dropdown me-2">
+                    <button class="btn btn-link dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-user-circle text-primary-custom"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_superuser %}
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Product Management</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>My Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-box me-2"></i>My Orders</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-plus me-2"></i>Register</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                
+                <a href="#" class="btn btn-link position-relative text-decoration-none">
+                    <i class="fas fa-shopping-cart text-primary-custom"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-count">
+                        {% if grand_total %}{{ grand_total|floatformat:2 }}€{% else %}0{% endif %}
+                    </span>
+                </a>
+            </div>
         </div>
-    </a>
-    <div class="dropdown-menu border-0" aria-labelledby="user-options">
-        <!-- autentication check -->
-        {% if request.user.is_authenticated %}
-            {% if request.user.is_superuser %}
-                <a href="{ url 'add_product' %}" class="dropdown-item" aria-label="Product Management">Product Management</a>
-            {% endif %}
-            <a href="{ url 'profile' %}" class="dropdown-item" aria-label="My Profile">My Profile</a>
-            <a href="{ url 'account_logout' %}" class="dropdown-item" aria-label="Logout">Logout</a>
-        {% else %}
-            <a href="{ url 'account_signup' %}" class="dropdown-item" aria-label="Register">Register</a>
-            <a href="{ url 'account_login' %}" class="dropdown-item" aria-label="Login">Login</a>
-        {% endif %}
-    </div>
-</li>
-<!-- bag with total -->
-<li class="list-inline-item">
-    <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none" href="{ url 'view_bag' %}">
-        <div class="text-center">
-            <div><i class="fa fa-shopping-cart fa-lg"></i></div>
-            <p class="my-0">
-                {% if grand_total %}
-                    €{{ grand_total|floatformat:2 }}
-                {% else %}
-                    €0.00
-                {% endif %}
-            </p>
+        
+        <div class="collapse" id="mobileSearch">
+            <div class="row py-2">
+                <div class="col-12">
+                    <form class="d-flex" role="search">
+                        <div class="input-group">
+                            <input class="form-control mobile-search-input" type="search" placeholder="Search products...">
+                            <button class="btn btn-primary-custom" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </a>
-</li>
+    </div>
+</div>
+
+<div class="mobile-nav d-lg-none">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="mobileNavMenu">
+            <ul class="navbar-nav w-100">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'home' %}">
+                        <i class="fas fa-home me-2"></i>Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#mobileProductsMenu">
+                        <i class="fas fa-bicycle me-2"></i>Products
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </a>
+                    <div class="collapse" id="mobileProductsMenu">
+                        <div class="mobile-submenu">
+                            <a href="#" class="mobile-submenu-item">
+                                <i class="fas fa-mountain me-2"></i>Mountain Bikes
+                            </a>
+                            <a href="#" class="mobile-submenu-item">
+                                <i class="fas fa-road me-2"></i>Road Bikes
+                            </a>
+                            <a href="#" class="mobile-submenu-item">
+                                <i class="fas fa-bolt me-2"></i>Electric Bikes
+                            </a>
+                            <a href="#" class="mobile-submenu-item">
+                                <i class="fas fa-tools me-2"></i>Accessories
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-info-circle me-2"></i>About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-envelope me-2"></i>Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-blog me-2"></i>Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fas fa-phone me-2"></i>Support</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

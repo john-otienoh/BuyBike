@@ -1,157 +1,168 @@
 {% load static %}
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- meta block -->
-    {% block meta %}
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="bike shop near me, bike shop, mountain bike, bike, bicycling, e bike, bicycle shop, electric bicycle">
-        <meta name="author" content="Outis">
-        <meta name="publisher" content="Outis">
-        <meta name="copyright" content="Outis">
-        <meta name="description" content="BuyBike store">
-        <meta name="page-topic" content="Bikes">
-        <meta name="page-type" content="Store">
-        <meta name="audience" content="Everyone">
-        <meta name="robots" content="index, follow">
-    {% endblock %}
-
-    <!-- extra meta block -->
-    {% block extra_meta %}
-    {% endblock %}
-
-    <!-- css block -->
-    {% block css %}
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato&display=swap">
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
-        <link rel="icon" type="image/xicon" href="{% static 'images/logo.png' %}">
-    {% endblock %}
-    <!-- js block -->
-    {% block js %}
-        {% comment %} <script src="https://kit.fontawesome.com/e9c73d7092.js" crossorigin="anonymous"></script> {% endcomment %}
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-        <!-- Stripe -->
-        {% comment %} <script src="https://js.stripe.com/v3/"></script> {% endcomment %}
-    {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BuyBike - Your trusted partner for quality cycling products and exceptional service">
+    <meta name="keywords" content="bike shop, mountain bike, e-bike, bicycle shop, cycling gear">
+    <meta name="author" content="BuyBike Store">
+    <meta name="robots" content="index, follow">
     
-    <title>BuyBike {% block title %}{% endblock %}</title>
-  </head>
-  <body>
-    <header class="container-fluid fixed-top data-bs-theme="light"">
-        <!-- side store name -->
-        <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex header">
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0 text-center text-lg-left">
-                <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                    <h2 class="logo-font text-black my-0">BuyBike <i class="fa fa-bicycle" aria-hidden="true"></i></h2>
-                </a>
-            </div>
-            <!-- search area -->
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-                <form method="GET" action="">
-                    <div class="input-group w-100">
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                </form>
-            </div>
-            <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-                <ul class="list-inline list-unstyled text-center text-lg-right my-0">
-                    <!-- my account menu -->
-                    <li class="list-inline-item dropdown">
-                        <a class="text-black nav-link" href="#" id="user-options-base" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="text-center">
-                                <div><i class="fa fa-user-circle-o fa-lg"></i></div>
-                                <p class="my-0">My Account</p>
-                            </div>
-                        </a>
-                        <div class="dropdown-menu border-0" aria-labelledby="user-options-base">
-                            {% if request.user.is_authenticated %}
-                                {% if request.user.is_superuser %}
-                                    <a href="{ url 'add_product' %}" class="dropdown-item" aria-label="Product Management">Product Management</a>
-                                {% endif %}
-                                <a href="{ url 'profile' %}" class="dropdown-item" aria-label="My Profile">My Profile</a>
-                                <a href="{ url 'account_logout' %}" class="dropdown-item" aria-label="Logout">Logout</a>
-                            {% else %}
-                                <a href="{ url 'account_signup' %}" class="dropdown-item" aria-label="Register">Register</a>
-                                <a href="{ url 'account_login' %}" class="dropdown-item" aria-label="Login">Login</a>
-                            {% endif %}
-                        </div>
+    <title>{% block title %}BuyBike - Premium Cycling Store{% endblock %}</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="icon" type="image/xicon" href="{% static 'images/logo.png' %}">
+    
+    {% block extra_css %}
+    {% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'home' %}">
+                <i class="fas fa-bicycle me-2"></i>
+                <span class="brand-text">BuyBike</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
-                    <!-- bag sumarry and link to bag -->
-                    <li class="list-inline-item">
-                        <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{ url 'view_bag' %}">
-                            <div class="text-center">
-                                <div><i class="fa fa-shopping-cart fa-lg"></i></div>
-                                <p class="my-0">
-                                    {% if grand_total %}
-                                        €{{ grand_total|floatformat:2 }}
-                                    {% else %}
-                                        €0.00
-                                    {% endif %}
-                                </p>
-                            </div>
-                        </a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown">Products</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Mountain Bikes</a></li>
+                            <li><a class="dropdown-item" href="#">Road Bikes</a></li>
+                            <li><a class="dropdown-item" href="#">Electric Bikes</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Accessories</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
                     </li>
                 </ul>
+                
+                <div class="d-flex align-items-center">
+                    <div class="search-container me-3 d-none d-lg-block">
+                        <form class="d-flex" role="search">
+                            <div class="input-group">
+                                <input class="form-control search-input" type="search" placeholder="Search products...">
+                                <button class="btn btn-search" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="dropdown me-3">
+                        <a class="nav-link user-menu" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>
+                            <span class="d-none d-md-inline">Account</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            {% if request.user.is_authenticated %}
+                                {% if request.user.is_superuser %}
+                                    <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Product Management</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                {% endif %}
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>My Profile</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-box me-2"></i>My Orders</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user-plus me-2"></i>Register</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt me-2"></i>Login</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    
+                    <a class="nav-link cart-link position-relative" href="#">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {% if grand_total %}{{ grand_total|floatformat:2 }}€{% else %}0{% endif %}
+                        </span>
+                        <span class="d-none d-md-inline ms-1">Cart</span>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="row bg-white">
-            <ul class="navbar navbar-expand-lg navbar-light w-100" aria-label="Navigation bar">
-                <li>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </li>
-                {% include 'includes/mobile-top-header.html' %}
-                {% include 'includes/main-nav.html' %} 
-            </ul>
+    </nav>
+
+    <div class="delivery-banner text-center py-2">
+        <div class="container">
+            <small class="text-white">
+                <i class="fas fa-truck me-2"></i>Free delivery on orders over €50! 
+                <i class="fas fa-shield-alt ms-3 me-2"></i>30-day money-back guarantee
+            </small>
         </div>
-        <!-- free delivery banner -->
-        <div id="delivery-banner" class="row text-center">
-            <div class="col prussian-blue text-white">
-                {% comment %} <h4 class="logo-font my-1">Free delivery on orders over €{{ free_delivery_threshold }}!</h4>                 {% endcomment %}
-            </div>
-        </div>
-    </header>
+    </div>
 
     {% if messages %}
-        <div class="message-container">
+        <div class="toast-container position-fixed top-0 end-0 p-3">
             {% for message in messages %}
-                {% with message.level as level %}
-                    {% if level == 40 %}
-                        {% include 'includes/toasts/toast_error.html' %}
-                    {% elif level == 30 %}
-                        {% include 'includes/toasts/toast_warning.html' %}
-                    {% elif level == 25 %}
-                        {% include 'includes/toasts/toast_success.html' %}
-                    {% else %}
-                        {% include 'includes/toasts/toast_info.html' %}
-                    {% endif %}
-                {% endwith %}
+                <div class="toast align-items-center text-white bg-{% if message.tags == 'error' %}danger{% elif message.tags == 'warning' %}warning{% elif message.tags == 'success' %}success{% else %}info{% endif %} border-0" role="alert">
+                    <div class="d-flex">
+                        <div class="toast-body">{{ message }}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
             {% endfor %}
         </div>
     {% endif %}
 
-    {% block page_header %}
-    {% endblock %}
+    <main class="main-content">
+        {% block page_header %}{% endblock %}
+        {% block content %}{% endblock %}
+    </main>
 
-    {% block content %}
-    {% endblock %}
-
-    {% block postloadjs %}
-    <script>
-        /*jshint esversion: 6 */ 
-        $('.toast').toast('show');
-    </script>
-    {% endblock %}
     {% include 'includes/footer.html' %}
-  </body>
+
+    <button class="btn btn-primary-custom btn-back-to-top" id="backToTop" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            var toastList = toastElList.map(function(toastEl) {
+                return new bootstrap.Toast(toastEl, { autohide: true, delay: 5000 });
+            });
+            toastList.forEach(toast => toast.show());
+            
+            const backToTopButton = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
 </html>
