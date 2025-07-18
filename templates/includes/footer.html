@@ -1,0 +1,91 @@
+
+{% load static %}
+<footer class="footer py-4">
+  <div class="container">
+    <div class="row">
+        <!-- Logo and copyright -->
+        <div class="col-lg-3 col-sm-12 mb-4">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png'%}" height="35" alt="Logo">
+            </a>
+            <p class="mt-2">
+              Your trusted partner for quality products and exceptional service. We deliver excellence in every purchase.
+            </p>
+        </div>                
+        <!-- Store links -->
+        <div class="col-6 col-sm-4 col-lg-2 mb-3">
+            <h6 class="fw-bold mb-3">Store</h6>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">About us</a></li>
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Find store</a></li>
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Categories</a></li>
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Blogs</a></li>
+            </ul>
+        </div>               
+        <!-- Information links -->
+        <div class="col-6 col-sm-4 col-lg-2 mb-3">
+            <h6 class="fw-bold mb-3">Information</h6>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Help center</a></li>
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Money refund</a></li>
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Shipping info</a></li>
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Refunds</a></li>
+            </ul>
+        </div>               
+        <!-- Support links -->
+        <div class="col-6 col-sm-4 col-lg-2 mb-3">
+            <h6 class="fw-bold mb-3">Support</h6>
+            <ul class="list-unstyled">
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Help center</a></li>
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Documents</a></li>
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Account restore</a></li>
+                <li class="mb-2"><a href="#" class="text-muted text-decoration-none">My orders</a></li>
+            </ul>
+        </div>               
+        <!-- Newsletter -->
+        <div class="col-lg-3 col-sm-12 mb-3">
+            <h6 class="fw-bold mb-3">Newsletter</h6>
+            <p class="text-muted">Stay in touch with latest updates about our products and offers</p>
+            <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Email">
+                <button class="btn btn-outline-secondary" type="button">
+                    Join
+                </button>
+            </div>
+        </div>
+    </div>         
+    <div class="border-top pt-4">
+        <div class="d-flex justify-content-between">
+            <!-- Payment methods -->
+            <div>
+                <i class="fab fa-cc-visa fa-lg me-2 text-muted"></i>
+                <i class="fab fa-cc-amex fa-lg me-2 text-muted"></i>
+                <i class="fab fa-cc-mastercard fa-lg me-2 text-muted"></i>
+                <i class="fab fa-cc-paypal fa-lg me-2 text-muted"></i>
+            </div>                   
+            <!-- Language selector -->
+            <div class="dropdown">
+                <a class="dropdown-toggle text-decoration-none text-dark" href="#" role="button" data-bs-toggle="dropdown">
+                    <span class="flag-united-kingdom flag me-1"></span>English
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <span class="flag-united-kingdom flag me-1"></span>English
+                        </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#"><span class="flag-poland flag me-1"></span>Polski</a></li>
+                    <li><a class="dropdown-item" href="#"><span class="flag-china flag me-1"></span>中文</a></li>
+                    <li><a class="dropdown-item" href="#"><span class="flag-japan flag me-1"></span>日本語</a></li>
+                    <li><a class="dropdown-item" href="#"><span class="flag-germany flag me-1"></span>Deutsch</a></li>
+                    <li><a class="dropdown-item" href="#"><span class="flag-france flag me-1"></span>Français</a></li>
+                    <li><a class="dropdown-item" href="#"><span class="flag-spain flag me-1"></span>Español</a></li>
+                    <li><a class="dropdown-item" href="#"><span class="flag-russia flag me-1"></span>Русский</a></li>
+                    <li><a class="dropdown-item" href="#"><span class="flag-portugal flag me-1"></span>Português</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </div>
+</footer>

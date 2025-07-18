@@ -1,0 +1,57 @@
+<!-- top heder for mobile view template -->
+<li class="list-inline-item">
+    <!-- search -->
+    <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="text-center">
+            <div><i class="fas fa-search fa-lg"></i></div>
+            <p class="my-0">Search</p>
+        </div>
+    </a>
+    <div class="dropdown-menu border-0 w-100 p-3 rounded-0 my-0" aria-labelledby="mobile-search">
+        <form class="form" method="GET" action="{ url 'products' %}">
+            <div class="input-group w-100">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </form>
+    </div>
+</li>
+<!-- my account -->
+<li class="list-inline-item dropdown">
+    <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="My Account">
+        <div class="text-center">
+            <div><i class="fa fa-user-circle-o fa-lg"></i></div>
+            <p class="my-0">My Account</p>
+        </div>
+    </a>
+    <div class="dropdown-menu border-0" aria-labelledby="user-options">
+        <!-- autentication check -->
+        {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+                <a href="{ url 'add_product' %}" class="dropdown-item" aria-label="Product Management">Product Management</a>
+            {% endif %}
+            <a href="{ url 'profile' %}" class="dropdown-item" aria-label="My Profile">My Profile</a>
+            <a href="{ url 'account_logout' %}" class="dropdown-item" aria-label="Logout">Logout</a>
+        {% else %}
+            <a href="{ url 'account_signup' %}" class="dropdown-item" aria-label="Register">Register</a>
+            <a href="{ url 'account_login' %}" class="dropdown-item" aria-label="Login">Login</a>
+        {% endif %}
+    </div>
+</li>
+<!-- bag with total -->
+<li class="list-inline-item">
+    <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none" href="{ url 'view_bag' %}">
+        <div class="text-center">
+            <div><i class="fa fa-shopping-cart fa-lg"></i></div>
+            <p class="my-0">
+                {% if grand_total %}
+                    €{{ grand_total|floatformat:2 }}
+                {% else %}
+                    €0.00
+                {% endif %}
+            </p>
+        </div>
+    </a>
+</li>
