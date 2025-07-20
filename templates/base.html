@@ -62,7 +62,7 @@
                 
                 <div class="d-flex align-items-center">
                     <div class="search-container me-3 d-none d-lg-block">
-                        <form class="d-flex" role="search">
+                        <form class="d-flex" name="q" role="search" method="GET" action="{% url 'products' %}">
                             <div class="input-group">
                                 <input class="form-control search-input" type="search" placeholder="Search products...">
                                 <button class="btn btn-search" type="submit">
@@ -164,5 +164,6 @@
     </script>
     
     {% block extra_js %}{% endblock %}
+    {% block postloadjs %}{% endblock %}
 </body>
 </html>

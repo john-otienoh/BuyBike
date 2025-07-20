@@ -5,14 +5,16 @@ from .models import Category, Product
 
 
 # Register your models here.
-@admin.register(Product)
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     """Category Admin"""
 
-    list_display = ["friendly_name", "name"]
+    list_display = ["name", "slug"]
+    prepopulated_fields = {"slug": ("name",)}
+    show_facets = admin.ShowFacets.ALWAYS
 
 
-@admin.register(Category)
+@admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     """Product Admin"""
 
@@ -25,7 +27,7 @@ class ProductAdmin(admin.ModelAdmin):
         "price",
         "stock",
     ]
-    list_filter = ["name", "is_available", "category"]
+    list_filter = ["is_available", "category"]
     search_fields = ["name", "sku"]
     prepopulated_fields = {"slug": ("name",)}
     raw_id_fields = ["category"]

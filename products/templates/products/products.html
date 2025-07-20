@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cache %}
+<!-- content block -->
+{% block content %}
+    <!-- overlay -->
+    <div class="overlay"></div>
+    <div class="container-fluid footer-padding">
+        <!-- products categories -->
+        {% cache 86400 category_nav %}
+        <div class="row">
+            <div class="col text-center mt-3">
+                <h2 class="logo-font">Products</h2>
+                {% for c in current_categories %}
+                    <a 
+                        class="category-badge text-decoration-none" 
+                        href="{% url 'products' %}?category={{ c.name }}"
+                        aria-label="Filter by {{ c.name }}"
+                    >
+                        <span class="p-2 mt-2 badge {% if c.name in request.GET.category %}badge-info{% else %}badge-white{% endif %} text-black rounded-0 border border-dark">
+                            {{ c.name }}
+                        </span>
+                    </a>
+                {% endfor %}
+                <hr class="w-50 mb-1">
+            </div>
+        </div>
+        {% endcache %}
+        <!-- product sort -->
+        <div class="row">
+            <div class="product-container col-10 offset-1">
+                <div class="row mt-1 mb-2">
+                    <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
+                        <div class="sort-select-wrapper w-50">
+                            <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}" aria-label="Sort Products">
+                                <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
+                                <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                                <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                                <option value="rating_asc" {% if current_sorting == 'rating_asc' %}selected{% endif %}>Rating (low to high)</option>
+                                <option value="rating_desc" {% if current_sorting == 'rating_desc' %}selected{% endif %}>Rating (high to low)</option>
+                                <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
+                                <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
+                                <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
+                                <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
+                            </select>
+                            <div class="sort-loading d-none">
+                                <div class="spinner-border spinner-border-sm text-info" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 order-md-first">
+                        <p class="text-muted mt-3 text-center text-md-left">
+                            {% if search_term or current_categories or current_sorting != 'None_None' %}
+                                <span class="small"><a class="text-decoration-none text-dark"  href="{% url 'products' %}">All Products</a> | </span>
+                            {% endif %}
+                            {{ all_products.paginator.count }} Products{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                        </p>
+                    </div>
+                </div>
+                <!-- product detail display -->
+                {% if not all_products %}
+                    <div class="col-12 text-center my-5">
+                        <h3>No products found</h3>
+                        <a href="{% url 'products' %}" class="btn btn-outline-black">Reset Filters</a>
+                    </div>
+                {% else %}
+                <div class="row">
+                    {% for product in all_products %}
+                        <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                            <div class="card h-100 border-0">
+                                <a class="text-decoration-none text-dark" href="{{ product.get_absolute_url }}" aria-label="View {{ product.name }} details">
+                                  {% if product.image %}
+                                      <img class="card-img-top img-fluid" 
+                                           src="{{ product.image.url }}" 
+                                           alt="{{ product.name }}"
+                                           loading="lazy"
+                                           srcset="{{ product.image.url }} 1x, {% if product.image_large %}{{ product.image_large.url }} 2x{% endif %}">
+                                  {% else %}
+                                      <img class="card-img-top img-fluid" 
+                                           src="{{ MEDIA_URL }}noimage.png" 
+                                           alt="{{ product.name }}"
+                                           loading="lazy">
+                                  {% endif %}
+                                  <div class="card-body pb-0">
+                                      <p class="mb-0">{{ product.name }}</p>
+                                  </div>
+                                </a>
+                                <div class="card-footer bg-white pt-0 border-0 text-left">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
+                                            {% if product.category %}
+                                            <p class="small mt-1 mb-0">
+                                                <a class="text-muted text-decoration-none text-dark" href="{% url 'products' %}?category={{ product.category.name }}">
+                                                    <i class="fas fa-tag mr-1"></i> {{ product.category.name }}
+                                                </a>
+                                            </p>
+                                            {% endif %}
+                                            {% if product.rating %}
+                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>{{ product.rating }} / 5</small>
+                                            {% else %}
+                                                <small class="text-muted">No Rating</small>
+                                            {% endif %}
+                                            {% comment %} {% if request.user.is_superuser %}
+                                                <small class="ml-3">
+                                                    <a href="{% url 'edit_product' product.id %}" aria-label="edit">Edit</a> | 
+                                                    <a class="text-danger" href="{% url 'delete_product' product.id %}">Delete</a>
+                                                </small>
+                                            {% endif %} {% endcomment %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- display for responsivness -->
+                        {% if forloop.counter|divisibleby:1 %}
+                            <div class="col-12 d-sm-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}                        
+                        {% if forloop.counter|divisibleby:2 %}
+                            <div class="col-12 d-none d-sm-block d-md-block d-lg-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:3 %}
+                            <div class="col-12 d-none d-lg-block d-xl-none mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                        {% if forloop.counter|divisibleby:4 %}
+                            <div class="col-12 d-none d-xl-block mb-5">
+                                <hr>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% include "products/includes/pag.html"%}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+<!-- js for arrow to back  to top of the screen -->
+{% block postloadjs %}
+    {{ block.super }}
+    <script src="{% static 'js/app.js'%}"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+            {% for product in products %}
+            {
+                "@type": "Product",
+                "position": {{ forloop.counter }},
+                "name": "{{ product.name }}",
+                "url": "{{ request.build_absolute_uri|slice:':-1' }}{{ product.get_absolute_url }}",
+                "image": "{{ product.image.url }}",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "{{ product.price }}",
+                    "priceCurrency": "USD"
+                }{% if product.rating %},
+                "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "{{ product.rating }}",
+                    "reviewCount": "1"
+                }{% endif %}
+            }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ]
+    }
+    </script>
+{% endblock %}

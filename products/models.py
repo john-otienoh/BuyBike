@@ -7,33 +7,26 @@ from django.urls import reverse
 class Category(models.Model):
     """Category Model"""
 
-    name = models.CharField(max_length=256, unique=True)
-    friendly_name = models.CharField(max_length=254, null=True, blank=True)
+    name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=256, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.name
-
-    def get_friendly_name(self):
-        """get_friendly_name function"""
-        return self.friendly_name
-
-    def save(self, *args, **kwargs):
-        """Prepopulate slug field"""
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-    # def get_absolute_url(self):
-    #     return reverse("product_by_category", args=[self.slug])
 
     class Meta:
         """Category Model Meta"""
 
         verbose_name_plural = "Categories"
         ordering = ["name"]
+
+    def __str__(self):
+        return self.name
+    
+    def save(self, *args, **kwargs):
+        """Prepopulate slug field"""
+        # if not self.slug:
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
 
 
 class Product(models.Model):
@@ -76,5 +69,6 @@ class Product(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
-    # def get_absolute_url(self):
-    #     return reverse("product_detail", args=[self.slug])
+    def get_absolute_url(self):
+        """Return Absolute url"""
+        return reverse("product_detail", args=[self.slug])

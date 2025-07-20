@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     # Local Apps
     "home.apps.HomeConfig",
     "products.apps.ProductsConfig",
+    # Third Party Apps
+    "crispy_forms",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -55,6 +58,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "BuyBike.urls"
 
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -66,6 +71,10 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+            ],
+            "builtins": [
+                "crispy_forms.templatetags.crispy_forms_tags",
+                "crispy_forms.templatetags.crispy_forms_field",
             ],
         },
     },
