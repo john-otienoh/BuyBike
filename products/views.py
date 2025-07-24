@@ -30,7 +30,7 @@ def products(request):
             if sort == "name":
                 all_products = all_products.order_by(functions.Lower("name"))
             if sort == "category":
-                sort = "category__name"
+                sort = "category__slug"
             if "direction" in params:
                 if direction == "desc":
                     sort = f"-{sort}"
@@ -38,22 +38,22 @@ def products(request):
 
         if "category" in params:
             categories = params["category"].split(",")
-            all_products = all_products.filter(category__name__in=categories).distinct()
-            current_categories = Category.objects.filter(name__in=categories)
+            all_products = all_products.filter(category__slug__in=categories).distinct()
+            current_categories = Category.objects.filter(slug__in=categories)
         else:
             current_categories = None
 
         if "q" in params:
             query = params["q"].strip()
-            if not query:
+            if query:
+                all_products = all_products.filter(
+                    Q(name__icontains=query)
+                    | Q(description__icontains=query)
+                    | Q(sku__icontains=query)
+                ).distinct()
+            else:
                 messages.error(request, "You didn't enter any search criteria!")
                 return redirect(reverse("products"))
-
-            all_products = all_products.filter(
-                Q(name__icontains=query)
-                | Q(description__icontains=query)
-                | Q(sku__icontains=query)
-            ).distinct()
 
     product_count = all_products.count()
     paginator = Paginator(all_products, 8)
@@ -68,7 +68,7 @@ def products(request):
 
     context = {
         "all_products": all_products,
-        "search_term": query,
+        "search_query": query,
         "current_categories": categories,
         "current_sorting": f"{sort}_{direction}",
         "product_count": product_count,

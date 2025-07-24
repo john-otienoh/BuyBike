@@ -3,6 +3,9 @@
 {% load cache %}
 <!-- content block -->
 {% block content %}
+    {% comment %} {% if search_query %}
+      <a href="{% url 'product_list' %}" class="btn btn-outline-secondary">Clear</a>
+    {% endif %} {% endcomment %}
     <!-- overlay -->
     <div class="overlay"></div>
     <div class="container-fluid footer-padding">
@@ -93,7 +96,7 @@
                                             <p class="lead mb-0 text-left font-weight-bold">${{ product.price }}</p>
                                             {% if product.category %}
                                             <p class="small mt-1 mb-0">
-                                                <a class="text-muted text-decoration-none text-dark" href="{% url 'products' %}?category={{ product.category.name }}">
+                                                <a class="text-muted text-decoration-none text-dark" href="{% url 'products' %}?category={{ product.category.slug }}">
                                                     <i class="fas fa-tag mr-1"></i> {{ product.category.name }}
                                                 </a>
                                             </p>

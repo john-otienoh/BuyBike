@@ -62,9 +62,9 @@
                 
                 <div class="d-flex align-items-center">
                     <div class="search-container me-3 d-none d-lg-block">
-                        <form class="d-flex" name="q" role="search" method="GET" action="{% url 'products' %}">
+                        <form class="d-flex" role="search" method="GET" action="{% url 'products' %}">
                             <div class="input-group">
-                                <input class="form-control search-input" type="search" placeholder="Search products...">
+                                <input class="form-control search-input" name='q' type="search" placeholder="Search products..." value="{{ search_query|default:'' }}">
                                 <button class="btn btn-search" type="submit">
                                     <i class="fas fa-search"></i>
                                 </button>
