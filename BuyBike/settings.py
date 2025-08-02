@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-
+from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # Local Apps
     "home.apps.HomeConfig",
     "products.apps.ProductsConfig",
+    "cart.apps.CartConfig",
+    "account.apps.AccountConfig",
     # Third Party Apps
     "crispy_forms",
     "storages",
@@ -71,6 +73,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'django.template.context_processors.media',
+                'cart.contexts.cart_contents',
             ],
             "builtins": [
                 "crispy_forms.templatetags.crispy_forms_tags",
@@ -81,6 +85,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "BuyBike.wsgi.application"
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 
 # Database
@@ -139,3 +144,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+FREE_DELIVERY_THRESHOLD = 75
+STANDARD_DELIVERY_PERCENTAGE = 20
+        
+
+LOGIN_REDIRECT_URL = "home"
+LOGIN_URL = "login"
+LOGOUT_URL = "logout"
+
+# Email server configuration
+
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_HOST = "smtp.gmail.com"
+# EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+
+SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
