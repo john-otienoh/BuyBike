@@ -1,0 +1,11 @@
+{% extends "base.html" %} 
+{% block title %}Logged out{% endblock %} 
+{% block content %}
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">You have been logged out</h5>
+    <p class="card-text">Thanks for Shopping with us</p>
+    <br><hr><a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-primary">Sign in again</a>
+  </div>
+</div>
+{% endblock %}
