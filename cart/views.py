@@ -1,28 +1,35 @@
-from django.shortcuts import render, redirect, reverse, HttpResponse, get_object_or_404
-from django.contrib import messages
+from django.shortcuts import render, redirect, get_object_or_404
 from products.models import Product
+from .forms import CartAddProductForm
+from django.views.decorators.http import require_POST
+from .cart import Cart
 # Create your views here.
 
-def cart(request):
-    """Render the Cart Contents"""
-    return render(request, 'cart/cart.html')
-
-def add_to_cart(request, id):
-    """Add a quantity of product to cart"""
-    product = get_object_or_404(Product, pk=id)
-    quantity = int(request.POST.get('quantity'))
-    redirect_url = request.POST.get('redirect_url')
-    cart = request.session.get('bag', {})
-    if id in list(cart.keys()):
-        cart[id] += quantity
-        messages.success(
-            request,(
-                f'Updated {product.name} quantity to '
-                f'{cart[id]}'
-            )
+@require_POST
+def cart_add(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    form = CartAddProductForm(request.POST)
+    if form.is_valid():
+        cd = form.cleaned_data
+        cart.add(
+            product=product,
+            quantity=cd['quantity'],
+            override_quantity=cd['override'] 
         )
-    else:
-        cart[id] = quantity
-        messages.success(request, f'Added {product.name} to your cart')
-    request.session['cart'] = cart
-    return redirect(redirect_url)
+    return redirect('cart:cart_detail')
+
+@require_POST
+def cart_remove(request, product_id):
+    cart = Cart(request)
+    product = get_object_or_404(Product, id=product_id)
+    cart.remove(product)
+    return redirect('cart:cart_detail')
+
+def cart_detail(request):
+    cart = Cart(request)
+    for item in cart:
+        item['update_quantity_form'] = CartAddProductForm(
+            initial={'quantity': item['quantity'], 'override': True}
+        )
+    return render(request, 'detail.html', {'cart': cart})

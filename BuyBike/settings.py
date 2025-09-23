@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,10 +44,15 @@ INSTALLED_APPS = [
     "products.apps.ProductsConfig",
     "cart.apps.CartConfig",
     "account.apps.AccountConfig",
+    "orders.apps.OrdersConfig",
     # Third Party Apps
     "crispy_forms",
+    "crispy_bootstrap5",
     "storages",
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -73,8 +79,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'django.template.context_processors.media',
-                'cart.contexts.cart_contents',
+                "django.template.context_processors.media",
+                'cart.context_processors.cart',
             ],
             "builtins": [
                 "crispy_forms.templatetags.crispy_forms_tags",
@@ -85,7 +91,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "BuyBike.wsgi.application"
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 
 
 # Database
@@ -116,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
-
+CART_SESSION_ID = "cart"
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
@@ -147,7 +153,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 FREE_DELIVERY_THRESHOLD = 75
 STANDARD_DELIVERY_PERCENTAGE = 20
-        
+
 
 LOGIN_REDIRECT_URL = "home"
 LOGIN_URL = "login"

@@ -16,11 +16,15 @@ class Category(models.Model):
         """Category Model Meta"""
 
         verbose_name_plural = "Categories"
+        verbose_name = "category"
+        indexes = [
+            models.Index(fields=["name"]),
+        ]
         ordering = ["name"]
 
     def __str__(self):
         return self.name
-    
+
     def save(self, *args, **kwargs):
         """Prepopulate slug field"""
         # if not self.slug:
@@ -28,12 +32,11 @@ class Category(models.Model):
         super().save(*args, **kwargs)
 
 
-
 class Product(models.Model):
     """[product model]"""
 
     category = models.ForeignKey(
-        "Category", null=True, blank=True, on_delete=models.SET_NULL
+        "Category", null=True, blank=True, on_delete=models.CASCADE
     )
     sku = models.CharField(max_length=256, null=True, blank=True)
     name = models.CharField(max_length=256)
@@ -58,7 +61,12 @@ class Product(models.Model):
     class Meta:
         """Product model ordering"""
 
-        ordering = ["-created_at"]
+        ordering = ["name"]
+        indexes = [
+            models.Index(fields=["id", "slug"]),
+            models.Index(fields=["name"]),
+            models.Index(fields=["-created_at"]),
+        ]
 
     def __str__(self):
         return self.name

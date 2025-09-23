@@ -95,10 +95,10 @@
                         </ul>
                     </div>
                     
-                    <a class="nav-link cart-link position-relative" href="{% url 'cart' %}">
+                    <a class="nav-link cart-link position-relative" href="{% url 'cart:cart_detail' %}">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {% if grand_total %}{{ grand_total|floatformat:2 }}€{% else %}0{% endif %}
+                            {% if cart %}{{ cart|length }}{% else %}0{% endif %}
                         </span>
                         <span class="d-none d-md-inline ms-1">Cart</span>
                     </a>

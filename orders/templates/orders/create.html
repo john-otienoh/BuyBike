@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Page Header -->
+        <div class="col-12 mb-4">
+            <h1 class="h2 fw-bold text-center">
+                <i class="fas fa-credit-card me-2 text-primary"></i>Checkout
+            </h1>
+            <p class="text-muted text-center">Complete your purchase securely</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <!-- Order Summary -->
+        <div class="col-lg-5 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="h5 mb-0">
+                        <i class="fas fa-shopping-bag me-2"></i>Your Order
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr class="border-bottom">
+                                    <th class="fw-semibold">Product</th>
+                                    <th class="fw-semibold text-center">Qty</th>
+                                    <th class="fw-semibold text-end">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="fw-medium">{{ item.product.name }}</span>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-secondary">{{ item.quantity }}</span>
+                                    </td>
+                                    <td class="text-end fw-semibold">${{ item.total_price }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Order Totals -->
+                    <div class="border-top pt-3 mt-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted">Subtotal:</span>
+                            <span class="fw-semibold">${{ cart.get_total_price }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted">Shipping:</span>
+                            <span class="text-muted">Free</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted">Tax:</span>
+                            <span class="text-muted">Calculated at checkout</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5 fw-bold text-dark">Total:</span>
+                            <span class="h4 fw-bold text-primary">${{ cart.get_total_price }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checkout Form -->
+        <div class="col-lg-7">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h3 class="h5 mb-0">
+                        <i class="fas fa-user-circle me-2 text-primary"></i>Shipping Information
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" class="order-form">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+
+                        <!-- Payment Method -->
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Payment Method *</label>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="payment_method" id="creditCard" value="credit" checked>
+                                <label class="form-check-label" for="creditCard">
+                                    <i class="fas fa-credit-card me-2"></i>Credit Card
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="payment_method" id="paypal" value="paypal">
+                                <label class="form-check-label" for="paypal">
+                                    <i class="fab fa-paypal me-2"></i>PayPal
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Terms and Conditions -->
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the <a href="#" class="text-decoration-none">Terms and Conditions</a> *
+                            </label>
+                            <div class="invalid-feedback">You must agree before submitting.</div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success btn-lg">Place Order</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Form Validation Script -->
+<script>
+// Bootstrap form validation
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
+</script>
+{% endblock %}

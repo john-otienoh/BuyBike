@@ -7,7 +7,7 @@ from django.db.models import Q, functions
 from django.db.models.functions import Lower
 from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from cart.forms import CartAddProductForm
 # from reviews.forms import ReviewForm
 # from reviews.models import Review
 from .models import Product, Category
@@ -78,5 +78,6 @@ def products(request):
 
 
 def product_detail(request, product):
-    product = get_object_or_404(Product, slug=product)
-    return render(request, "products/product_detail.html", {"product": product})
+    product = get_object_or_404(Product, slug=product, is_available=True)
+    cart_product_form = CartAddProductForm()
+    return render(request, "products/product_detail.html", {"product": product, 'cart_product_form': cart_product_form})
