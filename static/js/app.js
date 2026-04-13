@@ -1,71 +1,140 @@
-$(window).scroll(function() {
-    if ($(this).scrollTop() > 300) {
-        $('.btt-button').fadeIn();
-    } else {
-        $('.btt-button').fadeOut();
-    }
-});
+/* BikeShop – Main JS */
 
-$('.btt-link').click(function(e) {
-    e.preventDefault();
-    $('html, body').animate({scrollTop: 0}, 500);
-});
+document.addEventListener('DOMContentLoaded', () => {
 
-// AJAX sorting with loading indicator
-$('#sort-selector').change(function() {
-    const $selector = $(this);
-    const $loading = $selector.siblings('.sort-loading');
-    const currentUrl = new URL(window.location);
-    const selectedVal = $selector.val();
-    
-    $loading.removeClass('d-none');
-    
-    if (selectedVal !== "reset") {
-        const [sort, direction] = selectedVal.split('_');
-        currentUrl.searchParams.set("sort", sort);
-        currentUrl.searchParams.set("direction", direction);
-    } else {
-        currentUrl.searchParams.delete("sort");
-        currentUrl.searchParams.delete("direction");
-    }
-    
-    // Reset pagination when sorting
-    currentUrl.searchParams.delete("page");
-    
-    fetch(currentUrl, {
-        headers: {
-            'X-Requested-With': 'XMLHttpRequest'
+  // ── Cart AJAX ────────────────────────────────────────────
+  document.querySelectorAll('.add-to-cart-form').forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('[type=submit]');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        });
+        const data = await res.json();
+        if (data.success) {
+          updateCartCount(data.cart_count);
+          showToast(data.message, 'success');
+        } else {
+          showToast(data.error || 'Error adding to cart', 'danger');
         }
-    })
-    .then(response => response.text())
-    .then(html => {
-        const $newContent = $(html).find('.product-container');
-        $('.product-container').replaceWith($newContent);
-        history.pushState({}, '', currentUrl);
-    })
-    .catch(() => {
-        window.location.replace(currentUrl);
-    })
-    .finally(() => {
-        $loading.addClass('d-none');
+      } catch {
+        showToast('Network error. Please try again.', 'danger');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = btn.dataset.label || 'Add to Cart';
+      }
     });
-});
+  });
 
-$(document).on('click', '.delete-product', function(e) {
-    e.preventDefault();
-    const $button = $(this);
-    $('#productName').text($button.data('product-name'));
-    $('#confirmDelete').attr('href', $button.attr('href'));
-    $('#deleteModal').modal('show');
-});
+  // ── Cart Quantity Controls ───────────────────────────────
+  document.querySelectorAll('.qty-control').forEach(ctrl => {
+    const input = ctrl.querySelector('input');
+    ctrl.querySelector('.qty-minus')?.addEventListener('click', () => {
+      const v = parseInt(input.value) - 1;
+      if (v >= 1) { input.value = v; triggerQtyUpdate(input); }
+    });
+    ctrl.querySelector('.qty-plus')?.addEventListener('click', () => {
+      const max = parseInt(input.max || 9999);
+      const v = parseInt(input.value) + 1;
+      if (v <= max) { input.value = v; triggerQtyUpdate(input); }
+    });
+    input.addEventListener('change', () => triggerQtyUpdate(input));
+  });
 
-$('.product-card').hover(
-    function() {
-        $(this).css('transform', 'translateY(-5px)');
-        $(this).css('box-shadow', '0 10px 20px rgba(0,0,0,0.1)');
-    },
-    function() {
-        $(this).css('transform', '');
-        $(this).css('box-shadow', '');
+  function triggerQtyUpdate(input) {
+    const form = input.closest('form');
+    if (form) form.submit();
+  }
+
+  // ── Wishlist Toggle ──────────────────────────────────────
+  document.querySelectorAll('.btn-wishlist').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const url = btn.dataset.url;
+      if (!url) { window.location = '/login/'; return; }
+      try {
+        const fd = new FormData();
+        fd.append('csrfmiddlewaretoken', getCsrf());
+        const res = await fetch(url, { method: 'POST', body: fd, headers: { 'X-Requested-With': 'XMLHttpRequest' } });
+        const data = await res.json();
+        btn.classList.toggle('active', data.in_wishlist);
+        btn.querySelector('i').className = data.in_wishlist ? 'bi bi-heart-fill' : 'bi bi-heart';
+        updateWishlistCount(data.wishlist_count);
+        showToast(data.message, 'success');
+      } catch { showToast('Please log in to use wishlist.', 'info'); }
+    });
+  });
+
+  // ── Product Image Gallery ────────────────────────────────
+  const mainImg = document.getElementById('mainProductImage');
+  document.querySelectorAll('.thumb-gallery img').forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      if (mainImg) {
+        mainImg.src = thumb.dataset.full || thumb.src;
+        document.querySelectorAll('.thumb-gallery img').forEach(t => t.classList.remove('active'));
+        thumb.classList.add('active');
+      }
+    });
+  });
+
+  // ── Toast ────────────────────────────────────────────────
+  function showToast(message, type = 'success') {
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+      container = document.createElement('div');
+      container.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+      document.body.appendChild(container);
     }
-);
+    const id = 'toast_' + Date.now();
+    const iconMap = { success: 'bi-check-circle-fill', danger: 'bi-exclamation-circle-fill', info: 'bi-info-circle-fill', warning: 'bi-exclamation-triangle-fill' };
+    const icon = iconMap[type] || 'bi-info-circle-fill';
+    container.insertAdjacentHTML('beforeend', `
+      <div id="${id}" class="toast align-items-center text-bg-${type} border-0" role="alert">
+        <div class="d-flex">
+          <div class="toast-body"><i class="bi ${icon} me-2"></i>${message}</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+      </div>`);
+    const el = document.getElementById(id);
+    const toast = new bootstrap.Toast(el, { delay: 3500 });
+    toast.show();
+    el.addEventListener('hidden.bs.toast', () => el.remove());
+  }
+
+  function getCsrf() {
+    return document.querySelector('[name=csrfmiddlewaretoken]')?.value || '';
+  }
+
+  function updateCartCount(count) {
+    document.querySelectorAll('.cart-count-badge').forEach(el => { el.textContent = count; el.style.display = count ? '' : 'none'; });
+  }
+  function updateWishlistCount(count) {
+    document.querySelectorAll('.wishlist-count-badge').forEach(el => { el.textContent = count; el.style.display = count ? '' : 'none'; });
+  }
+
+  // ── Django messages → toasts ─────────────────────────────
+  document.querySelectorAll('.django-message').forEach(el => {
+    const type = el.dataset.type === 'error' ? 'danger' : (el.dataset.type || 'info');
+    showToast(el.dataset.message, type);
+  });
+
+  // ── Sticky header shadow ──────────────────────────────────
+  const navbar = document.querySelector('.navbar-main');
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      navbar.style.boxShadow = window.scrollY > 10 ? '0 4px 20px rgba(0,0,0,.25)' : '';
+    });
+  }
+
+  // ── Back to top ───────────────────────────────────────────
+  const btt = document.getElementById('backToTop');
+  if (btt) {
+    window.addEventListener('scroll', () => { btt.style.display = window.scrollY > 300 ? 'flex' : 'none'; });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  }
+});

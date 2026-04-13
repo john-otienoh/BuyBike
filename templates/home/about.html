@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}About Us – BikeShop{% endblock %}
+{% block content %}
+<!-- Hero -->
+<section style="background:linear-gradient(135deg,var(--dark),var(--dark-secondary));color:#fff;padding:5rem 0;">
+  <div class="container text-center">
+    <i class="bi bi-bicycle" style="font-size:3rem;color:var(--accent);"></i>
+    <h1 class="fw-bold mt-2">About BikeShop</h1>
+    <p class="lead" style="opacity:.8;max-width:600px;margin:1rem auto 0;">
+      Passionate cyclists serving cyclists since 2010. We live and breathe bikes.
+    </p>
+  </div>
+</section>
+
+<div class="container py-5">
+  <div class="row g-5 align-items-center mb-5">
+    <div class="col-lg-6">
+      <h2 class="fw-bold">Our Story</h2>
+      <p class="text-muted mt-3">BikeShop started in a small garage with one simple goal: give every cyclist access to premium gear at fair prices. Today we serve over 200,000 riders across 50+ countries.</p>
+      <p class="text-muted">We partner directly with the world's top manufacturers — Trek, Giant, Specialized, Shimano, and more — to bring you authentic products backed by full manufacturer warranties.</p>
+    </div>
+    <div class="col-lg-6">
+      <div class="row g-3">
+        {% for stat in stats %}
+          <div class="col-6">
+            <div class="border rounded p-4 text-center">
+              <div style="font-size:2rem;font-weight:800;color:var(--accent);">
+                {{ stat.value }}
+              </div>
+            <div class="text-muted">
+              {{ stat.label }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+        <div class="col-6"><div class="border rounded p-4 text-center"><div style="font-size:2rem;font-weight:800;color:var(--accent);">200K+</div><div class="text-muted">Customers</div></div></div>
+        <div class="col-6"><div class="border rounded p-4 text-center"><div style="font-size:2rem;font-weight:800;color:var(--accent);">50+</div><div class="text-muted">Countries</div></div></div>
+        <div class="col-6"><div class="border rounded p-4 text-center"><div style="font-size:2rem;font-weight:800;color:var(--accent);">15 Yrs</div><div class="text-muted">Experience</div></div></div>
+        <div class="col-6"><div class="border rounded p-4 text-center"><div style="font-size:2rem;font-weight:800;color:var(--accent);">4.9★</div><div class="text-muted">Avg. Rating</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <h2 class="fw-bold text-center mb-4">Our Values</h2>
+  <div class="row g-3 mb-5">
+    {% for icon, title, desc in values %}
+    <div class="col-md-4">
+      <div class="border rounded p-4 text-center h-100">
+        <i class="bi {{ icon }}" style="font-size:2rem;color:var(--accent);"></i>
+        <h5 class="fw-bold mt-3">{{ title }}</h5>
+        <p class="text-muted">{{ desc }}</p>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-md-4"><div class="border rounded p-4 text-center h-100"><i class="bi bi-award" style="font-size:2rem;color:var(--accent);"></i><h5 class="fw-bold mt-3">Quality First</h5><p class="text-muted">Every product is vetted by our team of expert cyclists before it reaches our shelves.</p></div></div>
+    <div class="col-md-4"><div class="border rounded p-4 text-center h-100"><i class="bi bi-people" style="font-size:2rem;color:var(--accent);"></i><h5 class="fw-bold mt-3">Community</h5><p class="text-muted">We're more than a store — we're a community of passionate riders who support each other.</p></div></div>
+    <div class="col-md-4"><div class="border rounded p-4 text-center h-100"><i class="bi bi-tree" style="font-size:2rem;color:var(--accent);"></i><h5 class="fw-bold mt-3">Sustainability</h5><p class="text-muted">We offset our carbon footprint and prioritize eco-friendly packaging and shipping.</p></div></div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}BikeShop – Premium Bikes, Gear & Accessories{% endblock %}
+
+{% block content %}
+
+<!-- ── Hero Carousel ────────────────────────────────────────── -->
+<div id="heroCarousel" class="carousel slide hero-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+  <div class="carousel-indicators">
+    {% for banner in banners %}
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="{{ forloop.counter0 }}"
+              {% if forloop.first %}class="active"{% endif %}></button>
+    {% empty %}
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+    {% endfor %}
+  </div>
+  <div class="carousel-inner">
+    {% for banner in banners %}
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        {% if banner.image %}<img src="{{ banner.image.url }}" alt="{{ banner.title }}">{% endif %}
+        <div class="carousel-caption">
+          <h2>{{ banner.title }}</h2>
+          {% if banner.subtitle %}<p>{{ banner.subtitle }}</p>{% endif %}
+          <a href="{{ banner.link|default:'#' }}" class="btn btn-accent btn-lg px-4">{{ banner.cta_text }}</a>
+        </div>
+      </div>
+    {% empty %}
+      <!-- Default slides when no banners are configured -->
+      <div class="carousel-item active">
+        <div class="carousel-caption">
+          <p class="text-uppercase fw-bold" style="color:var(--accent);letter-spacing:2px;">New Season 2025</p>
+          <h2>Ride the Mountain</h2>
+          <p>Explore our full range of premium mountain bikes built for every trail.</p>
+          <a href="?bike_type=mountain" class="btn btn-accent btn-lg px-4">Shop Mountain Bikes</a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-caption">
+          <p class="text-uppercase fw-bold" style="color:var(--accent);letter-spacing:2px;">Go Green</p>
+          <h2>Electric Revolution</h2>
+          <p>Effortless commuting with our cutting-edge e-bike collection.</p>
+          <a href="?bike_type=electric" class="btn btn-accent btn-lg px-4">Shop E-Bikes</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+<!-- ── Features Strip ───────────────────────────────────────── -->
+<div style="background:var(--surface);border-bottom:1px solid var(--border);">
+  <div class="container py-3">
+    <div class="row g-3 text-center">
+      {% for icon, title, desc in features %}
+        <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+          <i class="bi {{ icon }}" style="font-size:1.5rem;color:var(--accent);flex-shrink:0;"></i>
+          <div class="text-start">
+            <div style="font-weight:700;font-size:.85rem;">{{ title }}</div>
+            <div style="font-size:.75rem;color:var(--text-muted);">{{ desc }}</div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+          <i class="bi bi-truck" style="font-size:1.5rem;color:var(--accent);flex-shrink:0;"></i>
+          <div class="text-start"><div style="font-weight:700;font-size:.85rem;">Free Shipping</div><div style="font-size:.75rem;color:var(--text-muted);">On orders over $100</div></div>
+        </div>
+        <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+          <i class="bi bi-arrow-return-left" style="font-size:1.5rem;color:var(--accent);flex-shrink:0;"></i>
+          <div class="text-start"><div style="font-weight:700;font-size:.85rem;">30-Day Returns</div><div style="font-size:.75rem;color:var(--text-muted);">Hassle-free policy</div></div>
+        </div>
+        <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+          <i class="bi bi-shield-check" style="font-size:1.5rem;color:var(--accent);flex-shrink:0;"></i>
+          <div class="text-start"><div style="font-weight:700;font-size:.85rem;">Secure Payment</div><div style="font-size:.75rem;color:var(--text-muted);">256-bit SSL encryption</div></div>
+        </div>
+        <div class="col-6 col-md-3 d-flex align-items-center gap-2">
+          <i class="bi bi-headset" style="font-size:1.5rem;color:var(--accent);flex-shrink:0;"></i>
+          <div class="text-start"><div style="font-weight:700;font-size:.85rem;">Expert Support</div><div style="font-size:.75rem;color:var(--text-muted);">Mon–Sat 9am–6pm</div></div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<!-- ── Shop by Category ─────────────────────────────────────── -->
+<section class="container my-5">
+  <h2 class="section-title">Shop by Category</h2>
+  <div class="row g-3">
+    {% for cat in categories %}
+    <div class="col-6 col-md-4 col-lg-2">
+      <a href="{{ cat.get_absolute_url }}" class="text-decoration-none">
+        <div class="category-card shadow-sm">
+          {% if cat.image %}
+            <img src="{{ cat.image.url }}" alt="{{ cat.name }}">
+          {% else %}
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a1a2e,#16213e);"></div>
+          {% endif %}
+          <div class="overlay"><h6>{{ cat.name }}</h6></div>
+        </div>
+      </a>
+    </div>
+    {% empty %}
+    <!-- Static fallback categories -->
+    {% for slug, name, color in default_cats %}
+    <div class="col-6 col-md-4 col-lg-2">
+      <a href="?bike_type={{ slug }}" class="text-decoration-none">
+        <div class="category-card shadow-sm" style="background:{{ color }};">
+          <div class="overlay"><h6>{{ name }}</h6></div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+    {% endfor %}
+  </div>
+</section>
+
+<!-- ── Featured Products ─────────────────────────────────────── -->
+{% if featured_products %}
+<section class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="section-title mb-0">Featured Bikes</h2>
+    <a href="" class="btn btn-outline-accent btn-sm">View All <i class="bi bi-arrow-right ms-1"></i></a>
+  </div>
+  <div class="row g-3">
+    {% for product in featured_products %}
+    <div class="col-6 col-md-4 col-lg-3">
+      {% include 'partials/product_card.html' with product=product %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ── Banner CTA ─────────────────────────────────────────────── -->
+<section style="background:linear-gradient(135deg,var(--dark) 0%,var(--dark-secondary) 100%);padding:4rem 0;">
+  <div class="container text-center text-white">
+    <p class="text-uppercase fw-bold" style="color:var(--accent);letter-spacing:2px;">Limited Time</p>
+    <h2 class="fw-800" style="font-size:2.2rem;font-weight:800;">Up to 40% Off Electric Bikes</h2>
+    <p style="color:rgba(255,255,255,.75);max-width:500px;margin:1rem auto 1.75rem;">Premium e-bikes for city commuting and adventure trails. Don't miss out.</p>
+    <a href="?bike_type=electric" class="btn btn-accent btn-lg px-5">Shop E-Bikes</a>
+  </div>
+</section>
+
+<!-- ── New Arrivals ───────────────────────────────────────────── -->
+{% if new_arrivals %}
+<section class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="section-title mb-0">New Arrivals</h2>
+    <a href="?sort=newest" class="btn btn-outline-accent btn-sm">See All <i class="bi bi-arrow-right ms-1"></i></a>
+  </div>
+  <div class="row g-3">
+    {% for product in new_arrivals %}
+    <div class="col-6 col-md-4 col-lg-3">
+      {% include 'partials/product_card.html' with product=product %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ── Top Rated ─────────────────────────────────────────────── -->
+{% if top_rated %}
+<section style="background:var(--surface);padding:3rem 0;">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="section-title mb-0">Top Rated</h2>
+      <a href="?sort=rating" class="btn btn-outline-accent btn-sm">See All <i class="bi bi-arrow-right ms-1"></i></a>
+    </div>
+    <div class="row g-3">
+      {% for product in top_rated %}
+      <div class="col-6 col-md-4 col-lg-2">
+        {% include 'partials/product_card.html' with product=product %}
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ── Brands ─────────────────────────────────────────────────── -->
+{% if brands %}
+<section class="container my-5">
+  <h2 class="section-title centered">Our Brands</h2>
+  <div class="row g-4 align-items-center justify-content-center">
+    {% for brand in brands %}
+    <div class="col-4 col-md-2 text-center">
+      <a href="?brand={{ brand.slug }}" title="{{ brand.name }}">
+        {% if brand.logo %}
+          <img src="{{ brand.logo.url }}" alt="{{ brand.name }}" style="max-height:50px;filter:grayscale(100%);opacity:.6;transition:all .3s;" onmouseover="this.style.filter='none';this.style.opacity=1;" onmouseout="this.style.filter='grayscale(100%)';this.style.opacity=.6;">
+        {% else %}
+          <span style="font-weight:700;color:var(--text-muted);font-size:1rem;">{{ brand.name }}</span>
+        {% endif %}
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- ── Newsletter ─────────────────────────────────────────────── -->
+<section style="background:var(--accent);padding:3.5rem 0;">
+  <div class="container text-center text-white">
+    <i class="bi bi-envelope-heart" style="font-size:2.5rem;"></i>
+    <h3 class="fw-bold mt-2">Join 50,000+ Cyclists</h3>
+    <p style="opacity:.9;max-width:420px;margin:auto auto 1.5rem;">Get exclusive deals, cycling guides, and new product alerts straight to your inbox.</p>
+    <form action="" method="post" class="d-flex justify-content-center gap-2" style="max-width:420px;margin:auto;">
+      {% csrf_token %}
+      {{ newsletter_form.email }}
+      <button type="submit" class="btn btn-dark-custom px-4 flex-shrink-0">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

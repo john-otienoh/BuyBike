@@ -1,1040 +1,1361 @@
-# BuyBike e-commerce store
+# 🚴 BikeShop — Production-Ready Django eCommerce Platform
 
-![Hero image](readme_documents/mockup/hero_responsive.png)
+<div align="center">
 
-## [See Live web](https://bebike.herokuapp.com/)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-4.2-green?logo=django&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-purple?logo=bootstrap&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+![Status](https://img.shields.io/badge/Status-Production--Ready-brightgreen)
 
-<a name="tableOfContents"></a>
+A fully featured, production-grade bicycle eCommerce store built with Django 6.0.2. Includes everything from product browsing, cart management, and order tracking to a full admin panel — awaiting only your payment provider of choice.
+
+</div>
+
+---
 
 ## Table of Contents
 
-[**1. Project Overview**](#overview)
-
-* [**1.1. Project Description**](#description)
-
-* [**1.2 Project Requirements**](#requirements)
-
-    * [**1.2.1 Main Technologies**](#maintech)
-
-<hr>
-
-[**2. UX**](#ux)
-
-* [**2.1. Strategy**](#strategy)
-    * [**2.1.1 Project Goals**](#projectGoals)
-    * [**2.1.2 User Goals**](#userGoals)
-    * [**2.1.3 User Expectations**](#userExpectations)
-    * [**2.1.4 Trends of Modern Websites**](#trends)
-* [**2.2. Structure**](#structure)
-* [**2.3. Skeleton**](#skeleton)
-* [**2.4. Colour Scheme**](#colourScheme)
-* [**2.5. Typography**](#colorScheme)
-* [**2.6. Icons**](#icons)
-* [**2.7. Data Base**](#dataBase)
-
-<hr>
-
-[**3. Agile Methodology**](#agile)
-* [**3.1. KANBAN**](#kanban)
-
-<hr>
-
-[**4. Existing Features**](#features)
-* [**4.1. Home page**](#home)
-* [**4.2. Navbar**](#navbar)
-* [**4.3. Footer**](#footer)
-* [**4.4. The carousel**](#carousel)
-* [**4.5. User authentication**](#authentication)
-* [**4.6. User profile**](#userProflie)
-* [**4.7. Contact**](#contact)
-* [**4.8. Newsletter**](#newsletter)
-* [**4.9. Shop**](#shop)
-* [**4.10. Shopping bag**](#bag)
-* [**4.11. Product view**](#view)
-* [**4.12. Login Page**](#loginPage)
-* [**4.13. Logout Page**](#logoutPage)
-* [**4.14. Checkout Page**](#checkputPage)
-* [**4.15. Checkout Success Page**](#successCheckputPage)
-* [**4.16. Newsletter Subscribe Page**](#subscribePage)
-* [**4.17. Newsletter Subscribe Pag**](#unsubscribePage)
-
-<hr>
-
-[**5. Technologies Used**](#technologies)
-* [**5.1. Languages Used**](#languages)
-* [**5.2. Frameworks**](#frameworks)
-* [**5.3. Database**](#databasesUsed)
-* [**5.4. Technologies and Programs Used:**](#techPrograms)
-
-
-<hr>
-
-[**6. Testing**](#testing)
-* [**6.1 Python - PEP8**](#testing)
-* [**6.2 Html - W3C**](#testing)
-* [**6.3 CSS - W3C**](#testing)
-* [**6.4 JSHint**](#testing)
-* [**6.5 Manual Testing**](#testing)
-    * [**6.5.1 Home page**](#testing)
-        *   Carousel
-        *   Buttons carousel
-        *   Navbar
-        *   Footer
-        *   Home responsiveness
-    * [**6.5.2 My account**](#testing)
-        *   My account register
-        *   My account login logout user
-        *   My account login admin
-
-    * [**6.5.3 Products**](#testing)
-        *   Add products to database
-        *   All products add to bag
-        *   Add review
-        *   Add product responsiveness
-        *   Product view responsiveness
-    * [**6.5.4 Checkout payment**](#testing)
-    * [**6.5.5 Contact Form**](#testing)
-    * [**6.5.6 Newsletter subscribe and unsubscribe**](#testing)
-
-<hr>
-
-[**7. Search Engine Optimalisation**](#seo)
-
-<hr>
-
-[**8. Marketing**](#marketing)
-
-<hr>
-
-[**10. Social Media Business Page**](#social)
-
-<hr>
-
-[**11. Deployment**](#deployment)
-
-<hr>
-
-[**12. End Product**](#endProduct)
-
-<hr>
-
-[**13. Known Bugs**](#knownBugs)
-* [**13.1 Fixed bugs**](#fixedBugs)
-* [**13.1 Remaining Bugs**](#remainBugs)
-
-<hr>
-
-[**14. Credits**](#credits)
-
-<hr>
-
-[**15. Acknowledgements**](#acknowledgements)
-
-<hr>
-
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="overview"></a>
-
-# **1. Project Overview**
-
-<a name="description"></a>
-
-# **1.1. Project Description**
-
-One of the best benefits of living in the Netherlands is having access to over 37 000 km of bicycle paths, the only thing you need to enjoy is a bike. Therefore, I have created a bike shop website, where viewers can buy a bike, as well as some basic parts and accessories.
-
-The website allows users to use a search engine to find the most suitable product and with just one click add to the shopping trolley. The website is intuitive with a simple design, so with this e-commerce website buying a bike is as simple as ordering food delivery and who doesn’t like good home delivery.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="requirements"></a>
-
-# **1.2 Project Requirements**
-
-# **1.2.1 Main Technologies**
-
-As per project technologies scope for this project 
-
--   HTML, CSS, JavaScript, Python+Django
-
--   Relational database MySQL or Postgres
-
--   Stripe payments to manage payments
-
--   Additional libraries
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="ux"></a>
-
-# **2. UX**
-
-Be Bike website is designed in modern coloristic with white background. The coloristic gamma used was #EF476F #118AB2 #073B4C.
-
-User can either choose from the dropdown menu the product category and scroll through the range of products or can use the search engine to find a specific item.
-
-To make a purchase users can pay with a credit card as the checkout page features stripe payments.
-
-User can also be engaged by reviewing the products.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="projectGoals"></a>
-
-# **2.1.1 Project Goals**
-
-My goal was to create a simple and intuitive store, where customers can purchase bikes and bike related items. Website has a simple design, allowing user to navigate easily through it, by doing those customers can focus on the content, rather than trying to find items on the page.
-
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="userGoals"></a>
-
-# **2.1.2 User Goals**
-
-(#userGoals)
-
-ITEM            | FIRST TIME USER                  | RETURNING USER
---------------- | -------------------------------- | ---------------
-View a list of products and select items to purchase | ✅ | ✅	 	 
-Choose Product Category to view products and select items to purchase | ✅ | ✅ 
-Search products by name via the toolbar search option | ✅ | ✅
-Have visibility on price and product details | ✅ | ✅
-See the total of my purchases at the time | ✅ | ✅
-Sort list of products by best rated and price | ✅ | ✅ 
-Sort list of products in the specific product category | ✅ | ✅
-Add items to the basket and view what is currently in the basket | ✅ | ✅
-Update the quantity or remove the items from the basket before checking out | ✅ | ✅	 	 
-Easily enter the payment information at the checkout page | ✅ | ✅
-Have a secure payment checkout | ✅ | ✅
-Check out as guest | ✅ | ✅
-Create an account | ✅ | ✅
-Update my user profile |  | ✅ 
-View order history |  | ✅
-Easily log in and log out |  | ✅
-Register for an account |  | ✅
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="userExpectations"></a>
-
-# **2.1.3 User Expectations**
-
-The website should have a simple user interface, with the navigation to each section clear
--	The menu is intuitive and clear to read.
-
--	The user can navigate easily through an interface. 
-
--	The website responsiveness is achieved on all devices. 
-
--	The user has a clear overview of all products/product groups. 
-
--	Before making a payment, the total purchase price is displayed, and product quantities can be removed/ adjusted. 
-
--	Website has a secure payment method, giving the user comfort feeling
-
-<a name="trends"></a>
-
-# **2.1.4 Trends of Modern Websites**
-
-Based on the new trends in the website design, I have used the concept from the 1980s – Memphis design, which in this case was making the main page design simultaneously more colour, approachable and adventurous.  
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="structure"></a>
-
-# **2.2. Structure**
-
-Responsiveness design has been included in this project, as users are using different devices (including mobiles, laptops/ PC, and tablets). This is to ensure user achieves the best experiences on their chosen device.
-
--	User can easily navigate through labelled buttons.
-
--	All elements are consistent in font size, and colour scheme. 
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="skeleton"></a>
-
-# **2.3. Skeleton**
-
-# **Wireframes**
-
-### **Home page**
-<hr>
-
-![Home page](readme_documents/wireframes/wireframe_home_.png)
-
-### **Sign up page**
-<hr>
-
-![Sign up page](readme_documents/wireframes/wireframe_signup.png)
-
-### **Sign in page**
-<hr>
-
-![Sign in page](readme_documents/wireframes/wireframe_signin.png)
-
-[Back to Table Of Content](#tableOfContents)
-
-### **Contact page**
-<hr>
-
-![Contact page](readme_documents/wireframes/wireframe_contact.png)
-
-### **Newsletter**
-<hr>
-
-![Newsletter](readme_documents/wireframes/wireframe_newsletter.png)
-
-### **Newsletter Subscribe**
-<hr>
-
-![Newsletter Subscribe](readme_documents/wireframes/wireframe_newsletter_subscribe.png)
-<hr>
-
-### **Newsletter Unsubscribe**
-
-![Newsletter Unsubscribe](readme_documents/wireframes/wireframe_newsletter_unsubscribe.png)
-<hr>
-
-[Back to Table Of Content](#tableOfContents)
-
-### **Products**
-
-![Products](readme_documents/wireframes/wireframe_products.png)
-<hr>
-
-### **Products View**
-
-![Products View](readme_documents/wireframes/wireframe_product_view.png)
-<hr>
-
-### **Shopping bag**
-
-![Shopping bag](readme_documents/wireframes/wireframe_shopping_bag.png)
-<hr>
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="colourScheme"></a>
-
-# **2.4. Colour Scheme**
-
-Colors
-
-Please find the colours schemes that I used colors #EF476F #118AB2 #073B4C
-
-### **Colour gamma**
-
-![Colour gamma](readme_documents/style/color_gamma.png)
-<hr>
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="typography"></a>
-
-# **2.5. Typography**
-
-I decided to use "Lato" as my font of choice with sans serif as my backup font for browsers that might not support "Lato".
-
-The link to the font can be found [Google Fonts](https://fonts.google.com/)
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="icons"></a>
-
-# **2.6. Icons**
-
-I use icons provided by [Font Awesome](https://fontawesome.com/)
-
-### **My account - user-circle-o**
-
-![](readme_documents/style/fa-user-circle-o.png)
-<hr>
-
-### **Bag shopping-cart**
-
-![Bag shopping-cart*](readme_documents/style/shopping_cart.png)
-<hr>
-
-### **Newsletter envelope**
-
-![Newsletter envelope](readme_documents/style/enbelope.png)
-<hr>
-
-### **Contact comments-o**
-
-![Contact comments-o](readme_documents/style/comments.png)
-<hr>
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="dataBase"></a>
-
-# **2.7. Database**
-
-## [Database described here in the database file](READMEDATABASE.md)
-
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="agile"></a>
-
-# **3. Agile Methodology**
-Github issues were used to create the User stories and group them according to the MoSCoW prioritization technique. Link to the project with live issues can be found  [here](https://github.com/kamil-kw/BeBike/projects/1)
-
-The issues were then closed automatically when the pull request was linked to the issue.
-
-<a name="kanban"></a>
-
-# **3.1. KANBAN**
-
-### **Kanban Initial**
-<hr>
-
-![Kanban Initial](readme_documents/kanban/kanban_initial.png)
-
-### **Kanban Mid process**
-<hr>
-
-![Kanban Mid process](readme_documents/kanban/kanban_mid_process.png)
-
-### **Kanban Final**
-<hr>
-
-![Kanban Final](readme_documents/kanban/Kanban_final.png)
-
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="features"></a>
-
-# **4. Existing Features**
-
--	Responsive design
-
--	Navigation Menu
-
--	Postgress databases to store information and user login/profile information
-
--	CRUD Functionality
-
--	Filter list details functionality
-
--	Login functionality
-
--	Logout functionality
-
--	Register functionality
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="home"></a>
-
-# **4.1. Home page**
-
--	A carousel that displays contact, newsletter subscription and shop now options.
-
--	A shop now button that directs the user to the “All products” page where user can easily identify products they would like to purchase.
-
--	A contact button that directs the user to the contact form where they can contact the customer service team. 
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="navbar"></a>
-
-# **4.2. Navbar**
-
--	Store name with link to home page.
-
--	Products search bar.
-
--	My account dropdown list will display different elements dependent if user is a registered user or a guest.
-
--	Products are categorised to enable easy finding of the items; the icons are automatically adjusting depending on the screen size.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="footer"></a>
-
-# **4.3. Footer**
-
--	Copy rights.
-
--	Contact link to access page where user can contact customer service team.
-
--	Newsletter link to access page where user can subscribe or unsubscribe to receive “special offer”
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="carousel"></a>
-
-# **4.4. The carousel**
-
--	A carousel that displays contact newsletter and shop now options.
-
--	Shop now slides with message and button to product page.
-
--	Contact slide with message and button to contact page.
-
--	Newsletter slide with message and button to newsletter page.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="authentication"></a>
-
-# **4.5. User authentication**
-
--	New users can register in my account page.
-
--	Existing users can log in to their account page.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="userProflie"></a>
-
-# **4.6. User profile**
-
--	This page shows a form so the user can update their delivery details. Upon completing the form, all delivery details will be automatically updated if the user proceeds to the checkout page again.
-
--	User can view order history by selecting the order number, if order is completed user would receive an error message indicating they are viewing a past order summary
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="contact"></a>
-
-# **4.7. Contact**
-
--	Where user can leave message to customer service using site form.
-
--	Form check if email include @ sign, to ensure customer service can return to user.
-
--	Contact details - if user want to visit store or use different form of contact.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="newsletter"></a>
-
-# **4.8. Newsletter**
-
--	User can choose to subscribe or unsubscribe, this will direct to the correct page to newsletter.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="shop"></a>
-
-# **4.9. Shop**
-
--	The user can access the product pages by selecting the product category from the navigation bar.
-
--	 Filter using sort bar at the top right of the page,  user can filter by price, rating, name and category.
-
--	Each product has an image, name of product, price, category and rating.
-
--	The page also contains a back to top button, which the user can click to go to the top of the page.
-
--	As a superuser, the admin can see the edit and delete buttons, allowing quick access to the product admin
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="bag"></a>
-
-# **4.10. Shopping bag**
-
--	This page shows each product as a line item, displaying an image, name of the product, size, SKU, price per item, the quantity selected, quantity selector to update and a subtotal for each item.
-
--	When the quantity selector is at 1, the minus button is disabled, user can use the button underneath (remove) to remove item from the basket. 
-
--	Basket would show the pricing summary of all items within, delivery fee and total.
-
--	If the user has not met the free delivery threshold, then an alert message is shown, prompting the user that they can qualify for free delivery if they spend more.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="view"></a>
-
-# **4.11. Product view**
-
--	The product details will highlight an image, name of the product, brief description, price, category and rating, quantity selector, keep shopping button and an add to basket button.
-
--	Admin (superuser) have ability to edit and delete buttons, allowing quick access to the product admin .
-
--	The quantity selector starts at 1. When the quantity is at 1, the minus button is disabled.
-
--	When adding a product to the basket, the user will be prompted with a success message confirming the product has been added.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="loginPage"></a>
-
-# **4.12. Login Page**
-
--	Registered user would need to enter the email address and password that they used when signing up to the site.
-
--	The user can only log in once they have activated their account via an email received after signing up.
-
--	A message to prompt the user that if an account has not been created, they can click the signup hyperlink to be redirected to the signup page.
-
--	If the user enters in the wrong credentials, an error message is displayed to the user.
-
--	Once the user has successfully logged in, they will be redirected to the home page. A success message will show to confirm the login has been successful.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="logoutPage"></a>
-
-# **4.13. Logout Page**
-
--	When clicking logout from the navigation bar, the user is redirected to a sign-out page to confirm their action.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="checkputPage"></a>
-
-# **4.14. Checkout Page**
-
--	A checkout form, prompts the user to enter their delivery details with Stripe integration.
-
--	User has ability to save their details for next time, this is enabled by having a checkbox, which user can confirm. This would save the delivery detail and not the card details. 
-
--	Before continuing with checkout process, order summary will be displayed for user to validate the total purchase summary and see all items.
-
--	A message is shown just below the complete order button to warn the user that they will be charged a certain amount on their card.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="successCheckputPage"></a>
-
-# **4.15. Checkout Success Page**
-
--	This page shows a summary of their order, with an order number.
-
--	Once the user is on this page, an email will also be triggered to send out an order confirmation email.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="subscribePage"></a>
-
-# **4.16. Newsletter Subscribe Page**
-
--	User can subscribe to the newsletter by using a one-field form.
-
--	Once the user has successfully subscribed to the newsletter, they will be redirected to the home page. A success message will show up confirming the user has successfully subscribed to the newsletter.
-
--	If the user has already subscribed, an error message will show up.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="unsubscribePage"></a>
-
-# **4.17. Newsletter Subscribe Page**
-
--	User has ability to unsubscribe by filling email into the form displayed at the website.
-
--	Once the user has successfully unsubscribed from the newsletter, they will be redirected to the home page. A success message will show up confirming the user has successfully unsubscribed to the newsletter.
-
--	If the user enters an email address that is not subscribed to the newsletter, a message will be displayed to the user.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="technologies"></a>
-
-# **5. Technologies Used**
-
-<a name="languages"></a>
-
-# **5.1. Languages Used**
-
--   [HTML5](https://en.wikipedia.org/wiki/HTML)
-    -   The project uses HyperText Markup Language.
--   [CSS3](https://en.wikipedia.org/wiki/CSS)
-    -   The project uses Cascading Style Sheets.
--   [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
-    -   The project uses JavaScript.
--   [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
-    -   The project uses Python.
-    -   asgiref==3.5.1
-    -   backports.zoneinfo==0.2.1
-    -   boto3==1.23.9
-    -   botocore==1.26.9
-    -   dj-database-url==0.5.0
-    -   Django==3.2
-    -   django-allauth==0.41.0
-    -   django-countries==7.2.1
-    -   django-crispy-forms==1.14.0
-    -   django-formtools==2.3
-    -   django-storages==1.12.3
-    -   gunicorn==20.1.0
-    -   jmespath==1.0.0
-    -   oauthlib==3.2.0
-    -   Pillow==9.1.0
-    -   psycopg2-binary==2.9.3
-    -   python3-openid==3.2.0
-    -   pytz==2022.1
-    -   requests-oauthlib==1.3.1
-    -   s3transfer==0.5.2
-    -   sqlparse==0.4.2
-    -   stripe==2.72.0
--   [Jinja](https://jinja.palletsprojects.com/en/3.0.x/templates/)
-    -   Templating language for html
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="frameworks"></a>
-
-# **5.2. Frameworks Libraries**
--   [Django](https://www.djangoproject.com/)
-    -   The project uses Django as the main framework.
--   [Boostrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
-    -   Bootstrap Grid was used for responsiveness as well as features such as accordion.
--   [jQuery 3.6](https://blog.jquery.com/)
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="databasesUsed"></a>
-
-# **5.3. Database**
-
--   [Sqlite](https://www.sqlite.org/index.html)
-    -   The project uses sqlite as a local enviromental database
--   [PostgreSQL](https://www.postgresql.org/)
-    -   The project uses PostgreSQL as a deployment database
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="techPrograms"></a>
-
-# **5.4. Technologies and Programs Used:**
-
--   [AWS](https://aws.amazon.com/)
-    -   The project uses Amazon Web Services to host all static and media files.
--   [Heroku](https://www.heroku.com/)
-    -   The project is deployed and hosted by Heroku.
--   [Balsamiq](https://balsamiq.com/)
-    -   Balsamiq was used to create the wireframes during the design process.
--   [Google Fonts](https://fonts.google.com/)
-    -   Google fonts were used to import the "Lato" font into the style.css file which is used on all pages throughout the project.
--   [GitHub](https://github.com/)
-    -   GitHub was used to store the project's code after being pushed from Git
--   [Gitpod](https://www.gitpod.io/)
-    -   The project uses Gitpod.
--   [Chrome](https://www.google.com/intl/en_uk/chrome/)
-    -   The project uses Chrome to debug and test the source code using HTML5.
--   [W3School](https://www.w3schools.com/)
-    - For problem solving and code searching
--   [Stack Overflow](https://stackoverflow.com/)
-    - For problem solving and code searching
--   [PEP8 validator](http://pep8online.com/)
-    - For checking python convention
--   [Font Awesome](https://fontawesome.com/)
-    - Special Icons for links
--   [Multi Device Website Mockup Generator](https://techsini.com/multi-mockup/index.php)
-    - Multi Device Website Mockup Generator was used to create the Mock up image in this readme
--   [Django Secret Key Generator](https://miniwebtool.com/django-secret-key-generator/)
-    - Use to generate unique key
--   [TinyPNG](https://tinypng.com/)
-    - REsize image to imporove loading time
--   [Stripe](https://stripe.com/ie)
-    - Online payment system.
--   [AWS-S3 Amazon](https://stripe.com/ie)
-    - Online payment system.
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="testing"></a>
-
-# **6. Testing**
-
-## [All test here in the test file](READMETEST.md)
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="seo"></a>
-
-# **7. Search Engine Optimalisation**
-To improve the search engine optimisation (SEO) of the site I:
-
-- Added keywords in a meta tag to my base.html. The keywords were researched using  [WordTracker](https://www.wordtracker.com/), there are a number of short-tail and long-tail keywords for territory of Netherlands.
-
-- This is a list of all the keywords I produced:
-    - short tail words - bike, bicycle, ebike, city bike
-    - long tail words - bike shop near me, electric bike, mountain bike, transport bike
-
-- I ended up using these:
-
-Word Bike
-
-Key Word             | 
--------------------- | 
-bike shop near me | 
-bike shop | 
-mountain bike | 
-bike | 
-bicycling | 
-bike |
-e bike |
-bicycle shop |
-electric bicycle |
-cycle |
-e bikes for sale |
-
-
-I choose these keywords because they didn't have incredibly high volume and competition.
-
-<hr>
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="marketing"></a>
-
-# **8. Marketing**
-
-As part of my marketing strategies, I have decided to use content marketing, social media and email marketing root. All options are free, but effective for an e-commerce store.
-
--	Social media – Facebook was the chosen platform, which will help with building relationships and loyalty with customers. This will be enabled by frequent updates to the site, promoting the items and having direct interactions with existing and potential customers. The next steps would include usage of YouTube & Instagram as social media platforms. 
-
-
-![facebook_post](readme_documents/marketing/facebook_post.jpg)
-
-
--	Email marketing – another free source of marketing, where by using email subscriptions users would receive a newsletter, outlining current items in the store, sales and any other elements. This is a straightforward way to increase sales and have customer returning by providing discounts
-<hr>
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="social"></a>
-
-# **9. Social Media Business Page**
-
-The business will use social media as a platform to promote the business is [Facebook business page](https://www.facebook.com/BeBike-Store-100847359323133)
-
-![Facebook_business_page](readme_documents/marketing/facebook_main.jpg)
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="deployment"></a>
-
-# **10. Deployment**
-
-### **Development Environment**
-<hr>
-
-1. Create requirements.txt pip3 freeze --local > requirements.txt
-2. Create Procfile.
-3. Commit and push changes to Github.
-4. Move to the Heroku part of a deployment.
-
-### **To deploy my final project to the cloud I used Heroku. To do this I had to**
-<hr>
-
-1. Push the latest code to GitHub.
-2. Go to Heroku
-3. Select new in the top right corner.
-4. Create a new app.
-5. Enter the app name and select Europe as the region.
-6. Connect to GitHub.
-7. Search for repo-name.
-8. Select connect to the relevant repo you want to deploy.
-9. Select the settings tab.
-10. Add buildpack
-11. Select Python, then save changes.
-12. Make sure Heroku/Python is at the top of the list, followed by Heroku/Nodejs
-13. Navigate to the deploy tab
-14. Scroll down to Manual Deploy and select deploy branch.
-
-### **AWS S3 Bucket Configuration**
-1. Add and configure the AWS S3 Bucket:bebike, All public access. ACL: Everyone Objects -> List.
-2. Create the Bucket Policy - bebike policy.
-3. Create the Cross-Origin Resource Sharing (CORS)
-4. Access AWS IAM and create a user for the Training Project. Create a group, with the user attached. Download the CSV file with the credentials and save it in a safe place. Updated the ‘.env’ file with the relevant variables.
-5. Execute python3 manage.py collectstatic to upload static files to the AWS S3 Bucket.
-6. Upload the ‘media’ folder and files manually.
-7. Remove DISABLE_COLLECTSTATIC variable from Heroku Config Vars.
-
-### **Heroku Postgres Database**
-<hr>
-
-1. Go to the Resources tab in Heroku.
-2. Select Heroku Postgres from the Add-ons search bar
-3. Choose the Hobby Dev-Free plan.
-4. Click submit the order form.
-5. Go back to Gitpod bash terminal and install
-    * pip3 install dj_databse_url
-    * pip3 install psycopg2-binary 
-6. Seve in the requirements file by: 
-    * pip3 freeze > requirements.txt
-<hr>
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="endProduct"></a>
-
-# **11. End Product**
-
-### **Home page**
-
-![Home page](readme_documents/end_products/index_page.png)
-
-
-### **Product page**
-
-![Product page](readme_documents/end_products/products_page.png)
-
-### **Product view**
-
-![Product view](readme_documents/end_products/product_view_page.png)
-
-[Back to Table Of Content](#tableOfContents)
-
-### **Sign in**
-
-![Sign in](readme_documents/end_products/signin_page.png)
-
-### **Sign out**
-
-![Sign out](readme_documents/end_products/signout_page.png)
-
-### **My Profile**
-
-![My Profile](readme_documents/end_products/myprofile_page.png)
-
-[Back to Table Of Content](#tableOfContents)
-
-### **Newsletter**
-
-![Newsletter](readme_documents/end_products/newsletter_page.png)
-
-### **Newsletter subscribe**
-
-![Newsletter subscribe](readme_documents/end_products/newsletter_page.png)
-
-### **Newsletter unsubscribe**
-
-![Newsletter unsubscribe](readme_documents/end_products/newsletter_unsubscribe_page.png)
-
-[Back to Table Of Content](#tableOfContents)
-
-### **Checkout page**
-
-![Checkout page](readme_documents/end_products/checkout_page.png)
-![Checkout page](readme_documents/end_products/checkout_page_buttons.png)
-
-### **Checkout page success**
-
-![Checkout page success](readme_documents/end_products/checkout_succes_page.png)
-
-<hr>
-
-[Back to Table Of Content](#tableOfContents)
-
-<a name="knownBugs"></a>
-
-# **12. Known Bugs**
-
-<a name="fixedBugs"></a>
-
-# **12.1 Fixed bugs**
-
-### **boto instalation**
-
-![boto instalation](readme_documents/testing/boto_intalation_error.png)
-
-Incorrect packet unstalled instead of Boto3 boto was installed
-
-### **product_size value error**
-
-![product_size value](readme_documents/testing/Product_size_error.png)
-
-Unexpected keywords argument 'product size' caused html 400 error once size of product was chosen, fixed by adding 'product size' to checkout model.py
-
-```python
-    product_size = models.CharField(
-                max_length=50, null=True, blank=True
-    )
+1. [Project Overview](#1-project-overview)
+2. [Feature Summary](#2-feature-summary)
+3. [Technology Stack](#3-technology-stack)
+4. [Project Structure](#4-project-structure)
+5. [Data Models](#5-data-models)
+6. [URL Routes Reference](#6-url-routes-reference)
+7. [Prerequisites](#7-prerequisites)
+8. [Installation — Local Development](#8-installation--local-development)
+9. [Environment Variables](#9-environment-variables)
+10. [Database Setup and Migrations](#10-database-setup-and-migrations)
+11. [Seeding Sample Data](#11-seeding-sample-data)
+12. [Running the Development Server](#12-running-the-development-server)
+13. [Admin Panel Guide](#13-admin-panel-guide)
+14. [Authentication System](#14-authentication-system)
+15. [Shopping Cart Behaviour](#15-shopping-cart-behaviour)
+16. [Checkout and Order Flow](#16-checkout-and-order-flow)
+17. [Payment Integration Guide](#17-payment-integration-guide)
+18. [Static and Media Files](#18-static-and-media-files)
+19. [Deployment to Production](#19-deployment-to-production)
+20. [Deployment: PythonAnywhere](#20-deployment-pythonanywhere)
+21. [Deployment: Railway and Render](#21-deployment-railway-and-render)
+22. [Deployment: VPS with Ubuntu Nginx and Gunicorn](#22-deployment-vps-with-ubuntu-nginx-and-gunicorn)
+23. [Security Hardening Checklist](#23-security-hardening-checklist)
+24. [Customisation Guide](#24-customisation-guide)
+25. [Management Commands](#25-management-commands)
+26. [Troubleshooting](#26-troubleshooting)
+27. [Contributing](#27-contributing)
+28. [License](#28-license)
+
+---
+
+## 1. Project Overview
+
+BikeShop is a full-stack Django eCommerce application designed around a premium bicycle retail experience. The project is architected to be maintainable, extensible, and immediately deployable. It follows Django best practices throughout — class-based views, a custom context processor system, model-level business logic via `@property` methods, and a multiple-app structure that keeps the codebase navigable.
+
+The key design decisions are:
+
+**Single Django app** (`store`) — keeps imports and navigation simple for a project of this scope.
+
+**Session and auth cart merging** — guest carts persist in the session and merge automatically when a user logs in, so no items are ever lost at login.
+
+**Order snapshots** — product names, SKUs, and prices are copied into `OrderItem` at checkout time so historical orders remain accurate even if products are later edited or deleted.
+
+**Payment-provider agnostic** — the checkout flow creates and stores the order, then redirects to a dedicated payment view. You wire in any provider (Stripe, Razorpay, PayPal, M-Pesa) without touching the rest of the flow.
+
+**Real Unsplash images via seed command** — running `python manage.py seed_data` downloads and stores product images, category images, and banner images automatically using Python's built-in `urllib.request` — no API key required.
+
+---
+
+## 2. Feature Summary
+
+### Storefront
+
+| Feature | Details |
+|---|---|
+| Hero carousel | Full-width banner slides with image, title, subtitle, CTA button, and configurable display order |
+| Category browsing | Hierarchical categories (parent to children), each with image and slug-based URLs |
+| Product catalog | Filterable by category, brand, bike type, price range, and condition; sortable by price, date, rating, and popularity |
+| Full-text search | Searches name, description, brand name, and category name simultaneously |
+| Product detail | Multi-image gallery with thumbnail switcher, variant selector, star rating summary, specification table, and related products grid |
+| Product reviews | Star rating 1 to 5, title and body fields; verified-purchase badge; admin approval queue |
+| Wishlist | Toggle add/remove via AJAX; persisted per user account; count shown live in navbar badge |
+| Brand showcase | Brand logos on homepage with greyscale to colour hover effect |
+| Newsletter | Email subscription with duplicate-safe upsert and active/inactive flag |
+
+### Cart and Checkout
+
+| Feature | Details |
+|---|---|
+| Guest cart | Session-keyed cart — no login required to browse and add items |
+| Cart merging | Guest cart merges into user cart automatically on login |
+| AJAX add-to-cart | Uses fetch() to add items and update badge count without page reload |
+| Quantity controls | Plus and minus buttons with stock-capped maximum |
+| Coupon codes | Percentage-off, fixed-amount, or free-shipping types with expiry dates and use-count limits |
+| Shipping methods | Standard (free), Express ($15), Overnight ($35) with real-time total update via JavaScript |
+| Saved addresses | Checkout pre-fills from the user's default shipping address |
+| Order notes | Optional free-text field recorded on each order |
+
+### Orders and Account
+
+| Feature | Details |
+|---|---|
+| Order lifecycle | 8 statuses: Pending, Confirmed, Processing, Shipped, Out for Delivery, Delivered, Cancelled, Refunded |
+| Payment statuses | Unpaid, Paid, Partially Refunded, Refunded, Failed |
+| Status history | Every status change is logged with a timestamp and the actor who made it |
+| Order tracking | Tracking number and carrier fields on each order |
+| Account dashboard | Summary stats (total orders, wishlist count, review count) plus recent orders |
+| Address book | Multiple saved addresses per user with a default flag per address type |
+| Profile editing | Name, email, phone number, avatar, bio, date of birth, newsletter opt-in toggle |
+| Password change | Authenticated change using Django's PasswordChangeForm with session re-auth |
+
+### Admin Panel
+
+| Feature | Details |
+|---|---|
+| Product admin | Inline images and variants; live-editable price, stock, and availability from the list view |
+| Order admin | Inline order items and status history; status changes are auto-logged with the acting admin user |
+| Review moderation | Bulk approve and reject actions |
+| Coupon management | Full CRUD with real-time use-count tracking |
+| Banner management | Orderable slides with active toggle and image upload |
+
+---
+
+## 3. Technology Stack
+
+| Layer | Technology | Version | Purpose |
+|---|---|---|---|
+| Language | Python | 3.10 or higher | Application logic |
+| Framework | Django | 4.2.x | Web framework, ORM, admin |
+| Frontend CSS | Bootstrap | 5.3.2 | Responsive grid and UI components |
+| Frontend Icons | Bootstrap Icons | 1.11.3 | Icon set loaded from CDN |
+| Fonts | Google Fonts Inter | latest | UI typography loaded from CDN |
+| Forms | django-crispy-forms | 2.1 | Form rendering helper |
+| Forms | crispy-bootstrap5 | 0.7 | Bootstrap 5 template pack for crispy |
+| Static files | WhiteNoise | 6.6.0 | Serves compressed static files in production |
+| Configuration | python-decouple | 3.8 | Reads settings from .env file |
+| Images | Pillow | 10.2.0 | ImageField processing and validation |
+| Database (dev) | SQLite | built-in | Zero-config development database |
+| Database (prod) | PostgreSQL | 14 or higher | Recommended production database |
+| Web server (prod) | Gunicorn | 21 or higher | WSGI application server |
+| Reverse proxy (prod) | Nginx | 1.24 or higher | Static file serving and SSL termination |
+
+---
+
+## 4. Project Structure
+
+```
+BuyBike/
+│
+├── manage.py
+├── .env
+├── .gitignore
+├── requirements.txt
+├── README.md
+│
+├── config/                     # Project configuration (core settings)
+│   ├── __init__.py
+│   ├── settings/
+│   │   ├── __init__.py
+│   │   ├── base.py            # Shared settings
+│   │   ├── development.py     # Dev environment
+│   │   ├── production.py      # Prod environment
+│   ├── urls.py
+│   ├── asgi.py
+│   └── wsgi.py
+│
+├── apps/                      # All domain apps live here
+│   ├── __init__.py
+│
+│   ├── accounts/              # Auth & user management
+│   │   ├── models.py
+│   │   ├── views.py
+│   │   ├── urls.py
+│   │   ├── forms.py
+│   │   ├── signals.py
+│   │   └── admin.py
+│
+│   ├── products/              # Catalog system
+│   │   ├── models.py          # Product, Category, Review
+│   │   ├── views.py
+│   │   ├── urls.py
+│   │   ├── filters.py         # Filtering logic
+│   │   ├── services.py        # Business logic
+│   │   └── admin.py
+│
+│   ├── cart/                  # Shopping cart logic
+│   │   ├── models.py
+│   │   ├── views.py
+│   │   ├── services.py
+│   │   └── context_processors.py
+│
+│   ├── orders/                # Order lifecycle
+│   │   ├── models.py          # Order, OrderItem
+│   │   ├── services.py
+│   │   ├── signals.py
+│   │   └── admin.py
+│
+│   ├── checkout/              # Checkout orchestration
+│   │   ├── views.py
+│   │   ├── forms.py
+│   │   └── services.py
+│
+│   ├── payments/              # Payment abstraction layer
+│   │   ├── gateways/
+│   │   │   ├── stripe.py
+│   │   │   ├── mpesa.py
+│   │   ├── services.py
+│   │   └── webhooks.py
+│
+│   ├── core/                  # Shared utilities
+│   │   ├── models.py          # Base models (timestamps, etc.)
+│   │   ├── utils.py
+│   │   ├── mixins.py
+│   │   └── constants.py
+│
+│   └── marketing/             # Newsletter, SEO, engagement
+│       ├── models.py
+│       ├── views.py
+│       └── services.py
+│
+├── templates/                 # Global templates
+│   ├── base.html
+│   ├── includes/
+│   ├── products/
+│   ├── cart/
+│   ├── checkout/
+│   └── accounts/
+│
+static/
+|   ├── images/
+│   │   └── logo.png                       Source static files collected to staticfiles/ for production
+│   ├── css/
+│   │   └── main.css               Custom design system using CSS variables
+│   └── js/
+│       └── main.js          
+│
+└── media/                         
+|    ├── products/                  Product images
+|    ├── categories/                Category images
+|    ├── banners/                   Hero carousel banner images
+|    ├── brands/                    Brand logo images
+|    └── avatars/ 
+|
+├── infrastructure/            # DevOps / deployment
+│   ├── docker/
+│   │   ├── Dockerfile
+│   │   └── docker-compose.yml
+│   ├── nginx/
+│   └── scripts/
+│
+└── tests/                     # Centralized tests (optional)
+    ├── test_products.py
+    ├── test_cart.py
+    └── test_checkout.py
 ```
 
-### **Incorrect calculation**
+---
 
-![calculation](readme_documents/testing/calculation.png)
+## 5. Data Models
 
-Error with calculation caused by incorrect way of assigning calculation in the checkout models
+There are 14 models across three conceptual groups.
+
+### Catalogue Models
+
+**Category** — Hierarchical categories using a self-referential parent foreign key. The slug is auto-generated from the name on first save. Each category has an optional image and an `is_active` flag.
+
+**Brand** — Manufacturer record with logo, country of origin, and website URL. Products link to brands via a nullable foreign key.
+
+**Product** — The central model. Key fields and their purposes:
+
+| Field | Type | Notes |
+|---|---|---|
+| sku | CharField | Auto-generated UUID prefix if left blank |
+| slug | SlugField | Auto-generated from name; used in all product URLs |
+| bike_type | CharField | 11 choices: mountain, road, electric, bmx, gravel, kids, cruiser, folding, accessories, clothing, other |
+| price | DecimalField | Current selling price |
+| compare_price | DecimalField | Struck-through original price; drives the discount_percentage property |
+| stock | PositiveIntegerField | Decremented on confirmed order; triggers low-stock warning when at threshold |
+| specifications | JSONField | Arbitrary key-value pairs rendered as a spec table on the product detail page |
+| is_featured | BooleanField | Controls inclusion in the Featured Bikes section on the homepage |
+| is_new_arrival | BooleanField | Controls inclusion in the New Arrivals section on the homepage |
+| views_count | PositiveIntegerField | Incremented via a non-locking UPDATE on each product detail page view |
+
+Computed properties on Product: `is_in_stock`, `is_low_stock`, `discount_percentage`, `average_rating`, `review_count`, `primary_image`.
+
+**ProductImage** — One-to-many images per product. Setting `is_primary=True` on one image clears the flag on all others for that product via pre-save logic.
+
+**ProductVariant** — Handles size, colour, or spec variants. Each variant has independent stock and a `price_modifier` (positive or negative) added to the base product price.
+
+**Review** — User reviews linked to both a product and a user. A `unique_together` constraint prevents duplicate reviews from the same user on the same product. `is_verified_purchase` is set automatically at submission time by checking whether the user has a paid order containing this product.
+
+### Commerce Models
+
+**Cart** — Dual-mode cart: authenticated users have the `user` field set; guests have `session_key` set. On login, the `get_or_create_cart()` helper merges all guest `CartItem` records into the user's cart.
+
+**CartItem** — A `unique_together` constraint on `(cart, product, variant)` prevents duplicate line items. Adding the same product again increments the quantity instead.
+
+**Coupon** — Three discount types: percentage, fixed, free_shipping. The `is_valid` property checks active status, date window, and use count atomically.
+
+**Order** — Stores a full denormalised snapshot of the shipping address (not a foreign key to Address) so address edits or deletions never corrupt historical order records. Auto-generates a unique order number with prefix BS followed by 8 random digits.
+
+**OrderItem** — Denormalised snapshot of product name, SKU, variant name, and unit price at checkout time. The product foreign key is SET_NULL so deleting a product does not cascade-delete historical order records.
+
+**OrderStatusHistory** — Append-only log. The admin automatically creates a history entry whenever an order's status field is changed and saved.
+
+### User Models
+
+**UserProfile** — One-to-one extension of Django's built-in User model. Adds avatar, phone, date of birth, bio, and newsletter opt-in. Created automatically inside `RegisterView.post()`.
+
+**Address** — Multiple addresses per user with `address_type` (billing or shipping) and `is_default` flag. Setting an address as default clears the flag on all others of the same type via pre-save logic.
+
+**Wishlist** — One-to-one with User using a ManyToManyField to Product. Created on first use via `get_or_create`.
+
+**NewsletterSubscriber** — Stores email with an `is_active` flag. Re-subscribing a known email sets it active rather than raising a duplicate error.
+
+**Banner** — Homepage hero carousel slides. Configurable title, subtitle, image, link, CTA text, and display order integer.
+
+---
+
+## 6. URL Routes Reference
+
+All routes are under the `store` app namespace. Use them in templates as `{% url 'store:name' %}`.
+
+| Name | Path | Auth Required |
+|---|---|---|
+| store:home | / | No |
+| store:about | /about/ | No |
+| store:contact | /contact/ | No |
+| store:product_list | /products/ | No |
+| store:product_list_by_category | /products/category/slug/ | No |
+| store:product_detail | /products/slug/ | No |
+| store:add_review | /products/slug/review/ | Yes |
+| store:search | /search/ | No |
+| store:cart | /cart/ | No |
+| store:add_to_cart | /cart/add/id/ | No |
+| store:update_cart | /cart/update/id/ | No |
+| store:remove_from_cart | /cart/remove/id/ | No |
+| store:apply_coupon | /cart/apply-coupon/ | No |
+| store:checkout | /checkout/ | No |
+| store:order_success | /checkout/success/order_number/ | No |
+| store:order_list | /orders/ | Yes |
+| store:order_detail | /orders/order_number/ | Yes |
+| store:wishlist | /wishlist/ | Yes |
+| store:toggle_wishlist | /wishlist/toggle/id/ | Yes |
+| store:register | /register/ | No |
+| store:login | /login/ | No |
+| store:logout | /logout/ | Yes |
+| store:account | /account/ | Yes |
+| store:profile | /account/profile/ | Yes |
+| store:address_list | /account/addresses/ | Yes |
+| store:address_create | /account/addresses/add/ | Yes |
+| store:address_update | /account/addresses/pk/edit/ | Yes |
+| store:address_delete | /account/addresses/pk/delete/ | Yes |
+| store:change_password | /account/change-password/ | Yes |
+| store:newsletter_subscribe | /newsletter/subscribe/ | No |
+| store:payment_initiate | /payment/initiate/order_number/ | No |
+| store:payment_callback | /payment/callback/ | No |
+| store:payment_webhook | /payment/webhook/ | No |
+
+The Django admin is available at `/admin/`.
+
+---
+
+## 7. Prerequisites
+
+Ensure the following are installed on your machine before proceeding.
+
+| Requirement | Minimum Version | How to Check |
+|---|---|---|
+| Python | 3.10 | `python3 --version` |
+| pip | 23 or higher | `pip --version` |
+| git | 2.x | `git --version` |
+| venv | built into Python 3 | `python3 -m venv --help` |
+
+Optional but recommended for production deployments: PostgreSQL 14+, Nginx 1.24+, Certbot for Let's Encrypt SSL.
+
+---
+
+## 8. Installation — Local Development
+
+Follow each step in order. Do not skip the virtual environment step.
+
+### Step 1 — Obtain the source code
+
+Clone from GitHub:
+```bash
+git clone https://github.com/your-username/bikeshop.git
+cd bikeshop
+```
+
+Or from a zip file:
+```bash
+unzip bikeshop.zip
+cd bikeshop
+```
+
+### Step 2 — Create a virtual environment
+
+```bash
+python3 -m venv venv
+```
+
+### Step 3 — Activate the virtual environment
+
+macOS and Linux:
+```bash
+source venv/bin/activate
+```
+
+Windows Command Prompt:
+```cmd
+venv\Scripts\activate.bat
+```
+
+Windows PowerShell:
+```powershell
+venv\Scripts\Activate.ps1
+```
+
+Your shell prompt should now show `(venv)` confirming activation.
+
+### Step 4 — Install Python dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+This installs Django 4.2.9, Pillow, django-crispy-forms, crispy-bootstrap5, python-decouple, and whitenoise.
+
+### Step 5 — Create your environment file
+
+```bash
+cp .env.example .env
+```
+
+Open `.env` in a text editor. At minimum you must set `SECRET_KEY`. Generate one now:
+
+```bash
+python3 -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+Copy the output and paste it into `.env` after `SECRET_KEY=`. Save the file.
+
+### Step 6 — Apply database migrations
+
+```bash
+python manage.py migrate
+```
+
+You will see each migration being applied, ending with `Applying store.0001_initial... OK`.
+
+### Step 7 — Seed sample data
+
+```bash
+python manage.py seed_data
+```
+
+This creates 8 categories, 8 brands, 12 products with real Unsplash photos, 3 banner slides, and 2 coupon codes.
+
+### Step 8 — Create an admin superuser
+
+```bash
+python manage.py createsuperuser
+```
+
+Enter a username, email address, and password when prompted.
+
+### Step 9 — Start the development server
+
+```bash
+python manage.py runserver
+```
+
+Visit `http://127.0.0.1:8000/` in your browser. The store is running.
+
+---
+
+## 9. Environment Variables
+
+All configuration is read from the `.env` file by `python-decouple`. Never commit your `.env` file to version control — it is listed in `.gitignore`.
+
+| Variable | Required | Default | Description |
+|---|---|---|---|
+| SECRET_KEY | Yes | none | Django cryptographic secret. Must be unique and kept private. |
+| DEBUG | No | True | Set to False in production. Disables error pages and enables security headers. |
+| ALLOWED_HOSTS | Production | localhost,127.0.0.1 | Comma-separated list of hostnames Django will serve. |
+| EMAIL_HOST | No | smtp.gmail.com | SMTP server hostname. |
+| EMAIL_PORT | No | 587 | SMTP server port. |
+| EMAIL_HOST_USER | No | empty | SMTP login username. |
+| EMAIL_HOST_PASSWORD | No | empty | SMTP login password or app-specific password. |
+| DEFAULT_FROM_EMAIL | No | noreply@bikeshop.com | The From address on all outgoing emails. |
+| PAYMENT_PROVIDER | No | stripe | Informational label. Set to stripe, razorpay, or paypal. |
+| STRIPE_PUBLIC_KEY | For Stripe | empty | Publishable key from your Stripe dashboard, starts with pk_. |
+| STRIPE_SECRET_KEY | For Stripe | empty | Secret key from your Stripe dashboard, starts with sk_. |
+| STRIPE_WEBHOOK_SECRET | For Stripe | empty | Webhook signing secret from your Stripe dashboard, starts with whsec_. |
+
+---
+
+## 10. Database Setup and Migrations
+
+The project uses SQLite by default. No database software installation is needed for local development.
+
+### Standard migration commands
+
+```bash
+python manage.py makemigrations   # Generate new migration files after model changes
+python manage.py migrate          # Apply pending migrations to the database
+```
+
+### Switching to PostgreSQL
+
+Install the Python adapter:
+```bash
+pip install psycopg2-binary
+```
+
+Create the database and user in psql:
+```sql
+CREATE DATABASE bikeshop_db;
+CREATE USER bikeshop_user WITH PASSWORD 'your_strong_password';
+ALTER ROLE bikeshop_user SET client_encoding TO 'utf8';
+ALTER ROLE bikeshop_user SET default_transaction_isolation TO 'read committed';
+ALTER ROLE bikeshop_user SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE bikeshop_db TO bikeshop_user;
+\q
+```
+
+Update `config/settings.py` to replace the DATABASES block:
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME', default='bikeshop_db'),
+        'USER': config('DB_USER', default='bikeshop_user'),
+        'PASSWORD': config('DB_PASSWORD', default=''),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='5432'),
+    }
+}
+```
+
+Add the four new variables to `.env`, then run `python manage.py migrate` again.
+
+---
+
+## 11. Seeding Sample Data
+
+The `seed_data` management command creates realistic sample content and optionally downloads real product images from Unsplash.
+
+```bash
+# Full seed with image downloads — requires internet access
+python manage.py seed_data
+
+# Skip image downloads for faster setup or offline environments
+python manage.py seed_data --no-images
+```
+
+The command is idempotent — running it multiple times will not create duplicate records because it uses `get_or_create` throughout.
+
+### What gets created
+
+| Entity | Count | Examples |
+|---|---|---|
+| Categories | 8 | Mountain Bikes, Road Bikes, Electric Bikes, BMX and Dirt, Kids Bikes, Accessories |
+| Brands | 8 | Trek, Giant, Specialized, Cannondale, Scott, Cube, Shimano, SRAM |
+| Products | 12 | Trek Marlin 7, Giant Fathom 29, Trek Allant+ 7 e-bike, Shimano XT groupset, MIPS helmet |
+| Banners | 3 | Ride the Mountain, Electric Revolution, Road Season is Here |
+| Coupons | 2 | WELCOME10 gives 10% off orders over $50. SAVE50 gives $50 off orders over $300. |
+
+### How image downloading works
+
+Each entity has a hardcoded Unsplash URL pointing to a specific photo at a defined resolution. The seed command uses Python's built-in `urllib.request` to fetch the image bytes and then calls Django's `ImageField.save()` to write the file into the correct `media/` subdirectory. If a download fails due to a network issue or timeout, the command logs the failure and continues — it never crashes on a bad image URL.
+
+---
+
+## 12. Running the Development Server
+
+### Start the server
+
+```bash
+python manage.py runserver
+```
+
+### Useful URLs
+
+| URL | Description |
+|---|---|
+| http://127.0.0.1:8000/ | Storefront homepage |
+| http://127.0.0.1:8000/admin/ | Django admin panel |
+| http://127.0.0.1:8000/products/ | Full product catalog |
+| http://127.0.0.1:8000/register/ | New account registration |
+| http://127.0.0.1:8000/login/ | Login with username or email |
+| http://127.0.0.1:8000/account/ | Account dashboard |
+
+### Running on a different host or port
+
+```bash
+python manage.py runserver 0.0.0.0:8080
+```
+
+---
+
+## 13. Admin Panel Guide
+
+Access the admin panel at `http://127.0.0.1:8000/admin/` with your superuser credentials.
+
+### Products
+
+The product list view has live-editable columns for price, stock, is_available, and is_featured — you can update these without opening the full edit form. Click any product name to open the detail form which includes:
+
+- **Inline Images** — Upload multiple images. Tick the Is Primary checkbox on the image you want to show as the gallery hero. The pre-save signal ensures only one image per product can have is_primary set.
+- **Inline Variants** — Add size, colour, or spec variants. Each variant has its own stock count and a price modifier that is added to (or subtracted from) the base product price.
+- **Specifications** — Enter as a JSON object such as `{"Frame": "Aluminum", "Gears": "21-speed"}`. This renders as a table on the product detail page.
+
+### Orders
+
+Changing the Status dropdown on any order and saving it will automatically create an `OrderStatusHistory` record attributed to the currently logged-in admin user. Fill in Tracking Number and Carrier when shipping an order. Admin Notes is an internal field not shown to customers.
+
+### Reviews
+
+Navigate to Store then Reviews. Use the Approve Selected Reviews bulk action to make reviews visible on product pages. Rejected or pending reviews are hidden from customers.
+
+### Coupons
+
+Set valid_from and valid_to to control the active date window. Leave max_uses blank for unlimited uses. The current_uses counter is automatically incremented each time a coupon is successfully applied at checkout.
+
+### Banners
+
+The Order integer field controls the position of each slide in the homepage carousel. Lower numbers appear first.
+
+---
+
+## 14. Authentication System
+
+### Registration
+
+The registration form at `/register/` collects exactly four fields:
+
+1. Username — must be unique across the entire site
+2. Email — validated for format and uniqueness across the site; used for login and future notifications
+3. Password — subject to Django's four built-in validators
+4. Confirm Password — must match the password field exactly
+
+On successful submission, a UserProfile record is created automatically and the user is logged in immediately and redirected to the homepage.
+
+### Login
+
+The login form at `/login/` accepts either a username or an email address in a single combined field. The resolution logic works as follows:
+
+First, Django's `authenticate()` is called with the submitted value as the username. This succeeds immediately if the user typed their actual username.
+
+If that returns None, the code queries `User.objects.get(email__iexact=identifier)` to find the real username associated with that email address, then calls `authenticate()` again with the resolved username.
+
+If both attempts fail, a non-field error is added to the form and the login page is re-rendered.
+
+The Remember Me checkbox controls session lifetime. If unchecked, `request.session.set_expiry(0)` is called, which makes the session expire when the browser is closed rather than persisting for 30 days.
+
+### Logout
+
+Logout requires an HTTP POST request submitted via a form with a CSRF token. This prevents CSRF-based forced logout attacks. The logout button in both the navbar and the account sidebar submits this form correctly.
+
+### Password Change
+
+Authenticated users can change their password at `/account/change-password/`. After a successful change, `update_session_auth_hash(request, user)` is called to keep the current session valid so the user is not logged out.
+
+---
+
+## 15. Shopping Cart Behaviour
+
+### Guest Carts
+
+Adding an item to the cart does not require being logged in. When an anonymous user first adds a product, `request.session.create()` is called if no session exists. A `Cart` record is then created keyed by the `session_key`. The session cookie keeps this cart alive across page loads and browser restarts (subject to session cookie age settings).
+
+### Authenticated Carts
+
+Each logged-in user has at most one Cart record linked via a OneToOneField. `get_or_create_cart()` is called on every cart interaction to ensure this.
+
+### Cart Merging on Login
+
+When a user logs in after browsing as a guest, `get_or_create_cart()` detects an existing session-keyed cart and merges its items into the user's personal cart. If the same product and variant already exists in the user's cart, the quantities are summed up to the available stock limit. After merging, the guest cart record is deleted. This means users can add items before registering and never lose them.
+
+### AJAX Add-to-Cart
+
+Product cards and the product detail page use a form with the class `add-to-cart-form`. The JavaScript in `main.js` intercepts the form submit event, posts to the server via `fetch()` with the `X-Requested-With: XMLHttpRequest` header, and on a successful JSON response updates all `.cart-count-badge` elements and shows a toast notification — all without any page reload.
+
+---
+
+## 16. Checkout and Order Flow
+
+The complete flow from cart to confirmed order follows these steps:
+
+1. User reviews cart at `/cart/` and optionally applies a coupon code.
+2. User clicks Proceed to Checkout and is taken to `/checkout/`.
+3. The CheckoutForm collects contact information, shipping address, shipping method selection, and optional order notes.
+4. On a valid POST, `CheckoutView.post()` executes inside a `transaction.atomic()` block. It creates the Order record, creates all OrderItem records with denormalised price snapshots, decrements stock for each product, and increments the coupon use counter.
+5. The cart items are deleted and the session coupon key is cleared.
+6. The user is redirected to `/payment/initiate/order_number/`.
+7. You add your payment provider integration in `PaymentInitiateView` (see Section 17).
+8. On successful payment, update the order: set `payment_status` to paid, `status` to confirmed, and `paid_at` to the current timestamp.
+9. Redirect the user to `/checkout/success/order_number/`.
+
+### Shipping cost options
 
 ```python
-        if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
-            self.delivery_cost = self.order_total * (
-                            settings.STANDARD_DELIVERY_PERCENTAGE / 100)
+SHIPPING_RATES = {
+    'standard':  0,   # Free shipping
+    'express':   15,  # $15
+    'overnight': 35,  # $35
+}
 ```
-Fixed by adding new value sdp and remove from parentheses
 
+These are defined at the top of `store/views.py` and can be edited directly.
+
+---
+
+## 17. Payment Integration Guide
+
+The checkout creates the order before any payment occurs. The order sits in `status=pending` and `payment_status=unpaid` until your payment provider confirms success. You implement this by editing `store/views.py`.
+
+### Stripe Integration
+
+Install the Stripe library:
+```bash
+pip install stripe
+```
+
+Add to `.env`:
+```
+STRIPE_PUBLIC_KEY=pk_test_YOUR_KEY
+STRIPE_SECRET_KEY=sk_test_YOUR_KEY
+STRIPE_WEBHOOK_SECRET=whsec_YOUR_SECRET
+```
+
+Replace the body of `PaymentInitiateView.get()` with:
 ```python
-    if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
-        sdp = settings.STANDARD_DELIVERY_PERCENTAGE
-        self.delivery_cost = self.order_total * sdp / 100
+import stripe
+from django.urls import reverse
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+session = stripe.checkout.Session.create(
+    payment_method_types=['card'],
+    line_items=[{
+        'price_data': {
+            'currency': 'usd',
+            'product_data': {'name': f'BikeShop Order #{order.order_number}'},
+            'unit_amount': int(order.total * 100),
+        },
+        'quantity': 1,
+    }],
+    mode='payment',
+    metadata={'order_number': order.order_number},
+    success_url=request.build_absolute_uri(
+        reverse('store:payment_callback')) + '?session_id={CHECKOUT_SESSION_ID}',
+    cancel_url=request.build_absolute_uri(
+        reverse('store:order_detail', args=[order.order_number])),
+)
+return redirect(session.url)
 ```
 
-### **Incorrect link in the checkout message**
+Replace `PaymentCallbackView.get()` with:
+```python
+import stripe
 
-Incorrect url directing to 'bag' in the secure checkout message, issue fixed by replacing it with 'checkout'
+stripe.api_key = settings.STRIPE_SECRET_KEY
+session = stripe.checkout.Session.retrieve(request.GET.get('session_id'))
+order = Order.objects.get(order_number=session.metadata['order_number'])
 
-[Back to Table Of Content](#tableOfContents)
+if session.payment_status == 'paid':
+    order.payment_status = 'paid'
+    order.status = 'confirmed'
+    order.paid_at = timezone.now()
+    order.payment_reference = session.payment_intent
+    order.save()
+    OrderStatusHistory.objects.create(order=order, status='confirmed')
+    return redirect('store:order_success', order_number=order.order_number)
 
-<a name="remainBugs"></a>
+return redirect('store:order_detail', order_number=order.order_number)
+```
 
-# **12.2 Remaining Bugs**
+For the webhook (reliable server-to-server confirmation), decorate `PaymentWebhookView` with `@method_decorator(csrf_exempt, name='dispatch')` and verify the Stripe signature:
+```python
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 
-No remaining bugs, all known bugs adressed and fixwd before final deplayment
+@method_decorator(csrf_exempt, name='dispatch')
+class PaymentWebhookView(View):
+    def post(self, request):
+        payload = request.body
+        sig = request.headers.get('Stripe-Signature', '')
+        try:
+            event = stripe.Webhook.construct_event(
+                payload, sig, settings.STRIPE_WEBHOOK_SECRET
+            )
+        except stripe.error.SignatureVerificationError:
+            return JsonResponse({'error': 'Invalid signature'}, status=400)
+        if event['type'] == 'checkout.session.completed':
+            session = event['data']['object']
+            order = Order.objects.get(order_number=session['metadata']['order_number'])
+            order.payment_status = 'paid'
+            order.status = 'confirmed'
+            order.paid_at = timezone.now()
+            order.save()
+        return JsonResponse({'status': 'ok'})
+```
 
-<hr>
+Register `https://yourdomain.com/payment/webhook/` in your Stripe dashboard under Developers then Webhooks.
 
-[Back to Table Of Content](#tableOfContents)
+### Razorpay Integration
 
-<a name="credits"></a>
+```bash
+pip install razorpay
+```
 
-# **13. Credits**
+In `PaymentInitiateView.get()`:
+```python
+import razorpay
+client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+rz_order = client.order.create({
+    'amount': int(order.total * 100),
+    'currency': 'INR',
+    'receipt': order.order_number,
+    'payment_capture': 1,
+})
+return render(request, self.template_name, {
+    'order': order,
+    'razorpay_order_id': rz_order['id'],
+    'razorpay_key_id': settings.RAZORPAY_KEY_ID,
+})
+```
 
--   Heroku deployment instructions from Code Institute
+In `payment/initiate.html`, add the Razorpay checkout widget:
+```html
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<button onclick="openRazorpay()" class="btn btn-accent w-100 btn-lg">Pay Now</button>
+<script>
+function openRazorpay() {
+  var rzp = new Razorpay({
+    key: '{{ razorpay_key_id }}',
+    amount: {{ order.total|floatformat:0 }}00,
+    currency: 'INR',
+    order_id: '{{ razorpay_order_id }}',
+    name: 'BikeShop',
+    description: 'Order #{{ order.order_number }}',
+    handler: function(response) {
+      window.location = '/payment/callback/?payment_id=' 
+        + response.razorpay_payment_id + '&order={{ order.order_number }}';
+    }
+  });
+  rzp.open();
+}
+</script>
+```
 
--   Boutique Ado from code institute
+### M-Pesa Integration (Safaricom Daraja — Kenya)
 
--   Master Code Online with creating newsletter app and mail send
+```bash
+pip install daraja-py
+```
 
--   Stack overflow to support debugging
+Use the STK Push (Lipa Na M-Pesa Online) API to initiate payment from `PaymentInitiateView`. Register your callback URL at `/payment/webhook/` in the Safaricom Daraja portal. Obtain your Consumer Key, Consumer Secret, Shortcode, and Passkey from the Safaricom developer portal at `developer.safaricom.co.ke`.
 
--   CI Tutor Support for Help with
-    -   static files upload issue
-    -   Incorrect value in the database
+### PayPal Integration
 
--   Bootstrap documentation
+```bash
+pip install paypalrestsdk
+```
 
--   Django documentation
+Create a PayPal order in `PaymentInitiateView`, redirect the user to the PayPal approval URL, then confirm and capture the payment in `PaymentCallbackView`. Refer to the official PayPal REST SDK documentation for complete code samples.
 
--   Fontawsome
+---
 
--   Bootstrap 4
+## 18. Static and Media Files
 
--   mp4 to gif converter
+### Development
 
--   Fine Screen recorder
+Django's development server automatically serves static files from the `static/` directory. Media files (user uploads and seed images) are served via the `static()` URL helper added to `config/urls.py`.
 
--   Tutorials and inspiration
+### Collecting Static Files for Production
 
--   Images of existing products from fietsenwinkel.nl 
+```bash
+python manage.py collectstatic --noinput
+```
 
-[Back to Table Of Content](#tableOfContents)
+This copies all static files from `static/` and all installed app static directories into `staticfiles/`. WhiteNoise serves these files with compression and cache-busting headers directly from the Django process.
 
-<a name="acknowledgements"></a>
+### Media Files in Production
 
-# **14. Acknowledgements**
+Django does not serve media files in production. You have two options:
 
+**Nginx approach** — Add a location block to your Nginx configuration:
+```nginx
+location /media/ {
+    alias /home/ubuntu/bikeshop/media/;
+    expires 7d;
+}
+```
 
-I want to thank my Mentor **Marcel Mulder** for support and advice during my journey in the Code Institute, I could not have asked for a better Mentor – Thank you, Marcel!!!
+**Cloud storage approach** — For platforms like Heroku, Railway, or Render where the filesystem is ephemeral, install `django-storages` and configure an S3-compatible bucket or Cloudinary to store media files persistently across deployments.
 
-The fantastic **Code Institute Tutor Support team**, without you, I will not be able to release this project on time
+---
 
-My coding Buddy **Mateusz Leks** and all colleagues and peers in the Slack Community who are always there to offer their support and advice and some general good cheer on the tougher days! 
+## 19. Deployment to Production
 
-Special thanks to my fiancé **Malgorzata Ostrowska** for all patient and believing in me when I was not believing in myself
+Before deploying to any environment, complete this checklist:
 
-[Back to Table Of Content](#tableOfContents)
+- Set `DEBUG=False` in `.env`
+- Set `ALLOWED_HOSTS` to your actual domain or IP address
+- Generate a fresh `SECRET_KEY` — never reuse the development key
+- Configure PostgreSQL as the database backend
+- Run `python manage.py collectstatic`
+- Set real SMTP credentials for email sending
+- Add payment provider API keys
+- Ensure the `media/` directory is writable by the web server process
+
+---
+
+## 20. Deployment: PythonAnywhere
+
+PythonAnywhere offers a free tier suitable for hobby projects and a paid tier for production traffic.
+
+### Upload code
+
+Upload the zip via the PythonAnywhere Files tab, or clone from GitHub in a Bash console:
+```bash
+git clone https://github.com/your-username/bikeshop.git ~/bikeshop
+```
+
+### Create virtual environment and install dependencies
+
+```bash
+cd ~/bikeshop
+python3.10 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pip install psycopg2-binary
+```
+
+### Configure the WSGI file
+
+In the PythonAnywhere Web tab, set the WSGI configuration file path, then edit it to contain:
+```python
+import os, sys
+path = '/home/yourusername/bikeshop'
+if path not in sys.path:
+    sys.path.append(path)
+os.environ['DJANGO_SETTINGS_MODULE'] = 'config.settings'
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+```
+
+### Set environment variables
+
+In the Web tab under Environment Variables, add each key-value pair from your `.env` file.
+
+### Configure static and media file serving
+
+In the Web tab under Static Files, add two mappings:
+
+| URL | Directory |
+|---|---|
+| /static/ | /home/yourusername/bikeshop/staticfiles/ |
+| /media/ | /home/yourusername/bikeshop/media/ |
+
+Then run:
+```bash
+python manage.py collectstatic --noinput
+python manage.py migrate
+python manage.py createsuperuser
+```
+
+Click Reload in the Web tab. Your site is live.
+
+---
+
+## 21. Deployment: Railway and Render
+
+Both platforms support Django with minimal configuration files.
+
+### Procfile
+
+Create a file named `Procfile` in the project root:
+```
+web: gunicorn config.wsgi --bind 0.0.0.0:$PORT --workers 2
+```
+
+Install Gunicorn and save it to requirements:
+```bash
+pip install gunicorn
+pip freeze > requirements.txt
+```
+
+### runtime.txt
+
+Create a file named `runtime.txt` in the project root:
+```
+python-3.11.0
+```
+
+### Environment Variables
+
+Set these in the Railway or Render dashboard:
+```
+SECRET_KEY=your-production-secret-key
+DEBUG=False
+ALLOWED_HOSTS=your-app.railway.app
+DATABASE_URL=postgresql://...
+```
+
+Railway automatically injects `DATABASE_URL` if you add a PostgreSQL plugin to your project. Update `settings.py` to parse it using `dj-database-url`.
+
+### Build Command for Render
+
+In the Render dashboard under Build Command:
+```bash
+pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
+```
+
+---
+
+## 22. Deployment: VPS with Ubuntu Nginx and Gunicorn
+
+This is the most flexible production setup.
+
+### System dependencies
+
+```bash
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3.10 python3.10-venv python3-pip nginx postgresql postgresql-contrib -y
+```
+
+### PostgreSQL setup
+
+```bash
+sudo -u postgres psql
+```
+```sql
+CREATE DATABASE bikeshop_db;
+CREATE USER bikeshop_user WITH PASSWORD 'strong_unique_password';
+ALTER ROLE bikeshop_user SET client_encoding TO 'utf8';
+ALTER ROLE bikeshop_user SET default_transaction_isolation TO 'read committed';
+ALTER ROLE bikeshop_user SET timezone TO 'UTC';
+GRANT ALL PRIVILEGES ON DATABASE bikeshop_db TO bikeshop_user;
+\q
+```
+
+### Deploy application code
+
+```bash
+git clone https://github.com/your-username/bikeshop.git /home/ubuntu/bikeshop
+cd /home/ubuntu/bikeshop
+python3.10 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pip install gunicorn psycopg2-binary
+cp .env.example .env
+nano .env  # Fill in all production values
+python manage.py migrate
+python manage.py collectstatic --noinput
+python manage.py createsuperuser
+```
+
+### Gunicorn systemd service
+
+Create `/etc/systemd/system/bikeshop.service`:
+```ini
+[Unit]
+Description=BikeShop Gunicorn daemon
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/bikeshop
+ExecStart=/home/ubuntu/bikeshop/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/bikeshop.sock \
+          config.wsgi:application
+EnvironmentFile=/home/ubuntu/bikeshop/.env
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start bikeshop
+sudo systemctl enable bikeshop
+sudo systemctl status bikeshop
+```
+
+### Nginx configuration
+
+Create `/etc/nginx/sites-available/bikeshop`:
+```nginx
+server {
+    listen 80;
+    server_name yourdomain.com www.yourdomain.com;
+    client_max_body_size 20M;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+
+    location /static/ {
+        alias /home/ubuntu/bikeshop/staticfiles/;
+        expires 30d;
+        add_header Cache-Control "public, immutable";
+    }
+
+    location /media/ {
+        alias /home/ubuntu/bikeshop/media/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/bikeshop.sock;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $host;
+        proxy_redirect off;
+    }
+}
+```
+
+```bash
+sudo ln -s /etc/nginx/sites-available/bikeshop /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+```
+
+### SSL with Let's Encrypt
+
+```bash
+sudo apt install certbot python3-certbot-nginx -y
+sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
+```
+
+Certbot updates your Nginx config automatically and sets up certificate auto-renewal via a systemd timer.
+
+---
+
+## 23. Security Hardening Checklist
+
+All items in the table below are automatically applied when `DEBUG=False` in `config/settings.py`.
+
+| Setting | Value Applied | Effect |
+|---|---|---|
+| SECURE_BROWSER_XSS_FILTER | True | Sets the X-XSS-Protection response header |
+| SECURE_CONTENT_TYPE_NOSNIFF | True | Sets X-Content-Type-Options: nosniff header |
+| X_FRAME_OPTIONS | DENY | Prevents the site from being embedded in iframes |
+| SECURE_HSTS_SECONDS | 31536000 | Tells browsers to only use HTTPS for one year |
+| SECURE_HSTS_INCLUDE_SUBDOMAINS | True | Extends HSTS policy to all subdomains |
+| SECURE_SSL_REDIRECT | True | Redirects all HTTP requests to HTTPS |
+| SESSION_COOKIE_SECURE | True | Session cookie is only sent over HTTPS |
+| CSRF_COOKIE_SECURE | True | CSRF cookie is only sent over HTTPS |
+
+Additional recommendations:
+
+- Rotate SECRET_KEY if it was ever accidentally committed to version control.
+- Set ALLOWED_HOSTS to your exact list of domains — never use a wildcard asterisk.
+- Use a strong, unique PostgreSQL user password that is not reused elsewhere.
+- Run Gunicorn as a non-root OS user.
+- Keep all pip dependencies updated regularly with `pip list --outdated`.
+- Enable Fail2ban on your VPS to block brute-force login attempts at the firewall level.
+- Store all payment provider keys only in environment variables — never hardcode them in source files.
+- Consider adding `django-axes` to your installed apps for Django-level login attempt throttling.
+
+---
+
+## 24. Customisation Guide
+
+### Changing the brand colour
+
+The entire colour scheme is driven by CSS variables. Open `static/css/main.css` and change these values at the top of the file:
+
+```css
+--bs-primary: #e63946;
+--accent:     #e63946;
+--accent-dark:#c1121f;
+```
+
+The accent colour cascades to buttons, badges, price tags, hover states, and the navbar brand name automatically.
+
+### Adding a new bike type
+
+Add a new tuple to `Product.BIKE_TYPE_CHOICES` in `store/models.py`. Run `makemigrations` and `migrate`. The new type will automatically appear in the filter sidebar on the product catalog page.
+
+### Adding a new product field
+
+Add the field to the `Product` model in `models.py`. Run `makemigrations` and `migrate`. Add the field to the appropriate `fieldsets` section in `ProductAdmin` inside `admin.py`. Then render it in `product_detail.html` where you want it to appear.
+
+### Changing products per page
+
+In `config/settings.py`:
+```python
+PRODUCTS_PER_PAGE = 12  # Change to any integer you prefer
+```
+
+### Adding a new page
+
+Create a view in `store/views.py` as a subclass of `TemplateView` or `View`. Add a URL pattern in `store/urls.py`. Create the corresponding template in `store/templates/store/`. Add a link in `base.html` if it should appear in the navigation.
+
+### Changing shipping rates and options
+
+Edit the `SHIPPING_RATES` dictionary near the top of `store/views.py`:
+```python
+SHIPPING_RATES = {
+    'standard':  0,
+    'express':   15,
+    'overnight': 35,
+}
+```
+
+Also update the matching `SHIPPING_CHOICES` list in the `CheckoutForm` inside `store/forms.py` to keep the labels and values consistent.
+
+### Customising the admin site header
+
+In `config/urls.py`:
+```python
+admin.site.site_header = "BikeShop Admin"
+admin.site.site_title = "BikeShop"
+admin.site.index_title = "Store Management"
+```
+
+---
+
+## 25. Management Commands
+
+### seed_data
+
+```bash
+python manage.py seed_data
+python manage.py seed_data --no-images
+```
+
+Seeds the database with sample categories, brands, products, banners, and coupon codes. Downloads Unsplash images unless `--no-images` is passed. Safe to run multiple times.
+
+### Standard Django commands
+
+| Command | Purpose |
+|---|---|
+| python manage.py makemigrations | Generate migration files after changing models |
+| python manage.py migrate | Apply all pending migrations |
+| python manage.py createsuperuser | Create a new admin user interactively |
+| python manage.py collectstatic | Copy static files to staticfiles/ for production |
+| python manage.py shell | Open a Django-aware interactive Python shell |
+| python manage.py dbshell | Open a direct database shell |
+| python manage.py check | Run Django system checks without starting the server |
+| python manage.py test store | Run the test suite for the store application |
+| python manage.py showmigrations | List all migrations and their applied status |
+| python manage.py sqlmigrate store 0001 | Print the SQL for a specific migration |
+
+---
+
+## 26. Troubleshooting
+
+### ModuleNotFoundError: No module named 'decouple'
+
+Your virtual environment is not activated or dependencies were not installed inside it.
+```bash
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+### ImproperlyConfigured: The SECRET_KEY setting must not be empty
+
+Your `.env` file is missing or `SECRET_KEY` is not set in it.
+```bash
+cp .env.example .env
+# Edit .env and add a SECRET_KEY value
+```
+
+### Product images do not appear after running seed_data
+
+The seed command saves images to `media/products/`. Confirm the `media/` directory exists and is writable:
+```bash
+mkdir -p media
+chmod 755 media
+```
+In development, confirm DEBUG is True so that `config/urls.py` serves media files. In production, confirm Nginx has a `location /media/` block pointing to the correct directory.
+
+### OperationalError: no such table: store_product
+
+Migrations have not been applied to the database.
+```bash
+python manage.py migrate
+```
+
+### Cart items disappear between sessions
+
+Guest cart items are tied to the Django session. Confirm your SESSION_ENGINE is configured correctly. In development with SQLite, run `python manage.py migrate` to ensure the `django_session` table exists.
+
+### Static files return 404 in production
+
+Run `python manage.py collectstatic` and verify that your Nginx `location /static/` alias points to the `staticfiles/` directory (with an s), not the source `static/` directory.
+
+### CSRF verification failed on login or forms
+
+Confirm `ALLOWED_HOSTS` includes the exact domain making the request. If running behind a reverse proxy, ensure Nginx passes the `Host` header correctly. Only set `CSRF_COOKIE_SECURE=True` when HTTPS is fully configured.
+
+### Email is printed to the terminal instead of being sent
+
+In development, `EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'` is the default. This is intentional — it prints email content to the terminal. For production, set a real SMTP backend and credentials in `.env`.
+
+---
+
+## 27. Contributing
+
+Contributions are welcome and appreciated.
+
+1. Fork the repository on GitHub.
+2. Create a descriptively named feature branch: `git checkout -b feature/add-product-comparison`.
+3. Make your changes following the existing code conventions.
+4. Run the test suite to confirm nothing is broken: `python manage.py test store`.
+5. Commit with a clear and specific message: `git commit -m "Add: product comparison feature with side-by-side spec table"`.
+6. Push your branch to your fork: `git push origin feature/add-product-comparison`.
+7. Open a Pull Request against the `main` branch of this repository.
+
+### Code conventions
+
+- Follow PEP 8 for all Python code.
+- Use class-based views for all new views — no function-based views.
+- Business logic belongs in model methods and `@property` decorators, not in views or templates.
+- Templates must contain no business logic. Pass all pre-computed values from the view context.
+- Every new model must define `__str__`, `Meta.ordering`, and appropriate `db_index` hints on frequently filtered fields.
+- All new URL patterns must use descriptive names within the `store` namespace.
+
+---
+
+## 28. License
+
+This project is released under the MIT License.
+
+```
+MIT License
+
+Copyright (c) 2025 BikeShop
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+<div align="center">
+Built with Django · Bootstrap 5 · Pillow · WhiteNoise<br>
+Ready to ride 🚴
+</div>
