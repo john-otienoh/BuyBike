@@ -1,93 +1,41 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import get_user_model
-from .models import Profile
-
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Submit, Row, Column, Field, HTML
+from .models import UserProfile, Address
 
 class RegisterForm(UserCreationForm):
     # fields we want to include and customize in our form
-    first_name = forms.CharField(
-        max_length=100,
-        required=True,
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "First Name",
-                "class": "form-control",
-            }
-        ),
-    )
-    last_name = forms.CharField(
-        max_length=100,
-        required=True,
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Last Name",
-                "class": "form-control",
-            }
-        ),
-    )
-    username = forms.CharField(
-        max_length=100,
-        required=True,
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Username",
-                "class": "form-control",
-            }
-        ),
-    )
     email = forms.EmailField(
         required=True,
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Email",
-                "class": "form-control",
-            }
-        ),
-    )
-    password1 = forms.CharField(
-        max_length=50,
-        required=True,
-        widget=forms.PasswordInput(
-            attrs={
-                "placeholder": "Password",
-                "class": "form-control",
-                "data-toggle": "password",
-                "id": "password",
-            }
-        ),
-    )
-    password2 = forms.CharField(
-        max_length=50,
-        required=True,
-        widget=forms.PasswordInput(
-            attrs={
-                "placeholder": "Confirm Password",
-                "class": "form-control",
-                "data-toggle": "password",
-                "id": "password",
-            }
-        ),
+        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'you@example.com'}),
     )
 
     class Meta:
-        model = get_user_model()
-        fields = [
-            "first_name",
-            "last_name",
-            "username",
-            "email",
-            "password1",
-            "password2",
-        ]
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
-    def clean_password2(self):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Choose a username'})
+        self.fields['password1'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Create a password'})
+        self.fields['password2'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Confirm your password'})
+        self.fields['password1'].label = 'Password'
+        self.fields['password2'].label = 'Confirm Password'
+
+    def clean_password(self):
         cd = self.cleaned_data
         if cd["password1"] != cd["password2"]:
             raise forms.ValidationError("Passwords don't match.")
         return cd["password2"]
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("An account with this email already exists.")
+        return email
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(
@@ -121,25 +69,66 @@ class LoginForm(AuthenticationForm):
 
 
 class UpdateUserForm(forms.ModelForm):
-    username = forms.CharField(
-        max_length=100,
-        required=True,
-        widget=forms.TextInput(attrs={"class": "form-control"}),
+    username_or_email = forms.CharField(
+        label='Username or Email',
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Username or email address',
+            'autofocus': True,
+        }),
     )
-    email = forms.EmailField(
-        required=True, widget=forms.TextInput(attrs={"class": "form-control"})
+    password = forms.CharField(
+        label='Password',
+        widget=forms.PasswordInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Your password',
+        }),
     )
+    remember_me = forms.BooleanField(required=False, label='Remember me for 30 days')
 
+class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["username", "email"]
+        fields = ['first_name', 'last_name', 'email']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
 
-class UpdateProfileForm(forms.ModelForm):
-    avatar = forms.ImageField(
-        widget=forms.FileInput(attrs={"class": "form-control-file"})
-    )
-
+class ProfileUpdateForm(forms.ModelForm):
     class Meta:
-        model = Profile
-        fields = ["avatar", "date_of_birth"]
+        model = UserProfile
+        fields = ['avatar', 'phone', 'date_of_birth', 'bio', 'newsletter_subscribed']
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'bio': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
+        }
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ['address_type', 'full_name', 'phone', 'street_address', 'apartment',
+                  'city', 'state', 'country', 'postal_code', 'is_default']
+        widgets = {
+            'address_type': forms.Select(attrs={'class': 'form-select'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            'address_type',
+            Row(Column('full_name', css_class='col-md-6'), Column('phone', css_class='col-md-6')),
+            'street_address', 'apartment',
+            Row(Column('city', css_class='col-md-4'), Column('state', css_class='col-md-4'),
+                Column('postal_code', css_class='col-md-4')),
+            'country', 'is_default',
+            Submit('submit', 'Save Address', css_class='btn btn-primary'),
+        )
+        for name, field in self.fields.items():
+            if name not in ('is_default',):
+                widget = field.widget
+                if not isinstance(widget, forms.Select):
+                    widget.attrs['class'] = 'form-control'

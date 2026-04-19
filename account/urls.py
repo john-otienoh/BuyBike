@@ -4,20 +4,18 @@ from .views import RegisterView, profile, CustomLoginView
 from .forms import LoginForm
 
 
-# app_name = "account"
+app_name = "accounts"
 
 urlpatterns = [
-    # path("home/", home, name="home"),
-    # path(
-    #     "login/",
-    #     CustomLoginView.as_view(
-    #         redirect_authenticated_user=True,
-    #         template_name="registration/login.html",
-    #         authentication_form=LoginForm,
-    #     ),
-    #     name="login",
-    # ),
-    path("", include("django.contrib.auth.urls")),
-    path("register/", RegisterView.as_view(), name="register"),
-    path("profile/", profile, name="profile"),
+    path('register/', views.RegisterView.as_view(), name='register'),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', views.LogoutView.as_view(), name='logout'),
+
+    path('account/', views.AccountView.as_view(), name='account'),
+    path('account/profile/', views.ProfileUpdateView.as_view(), name='profile'),
+    path('account/addresses/', views.AddressListView.as_view(), name='address_list'),
+    path('account/addresses/add/', views.AddressCreateView.as_view(), name='address_create'),
+    path('account/addresses/<int:pk>/edit/', views.AddressUpdateView.as_view(), name='address_update'),
+    path('account/addresses/<int:pk>/delete/', views.AddressDeleteView.as_view(), name='address_delete'),
+    path('account/change-password/', views.ChangePasswordView.as_view(), name='change_password'),
 ]

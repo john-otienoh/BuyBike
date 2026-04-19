@@ -1,37 +1,60 @@
 from django import forms
-from .widgets import CustomClearableFileInput
-from .models import Product, Category
+from .models import Review
 
-
-class ProductForm(forms.ModelForm):
-    """Products Form"""
-
-    class Meta:
-        """Products Meta Form"""
-
-        model = Product
-        fields = "__all__"
-
-    image = forms.ImageField(
-        label="Product Image",
-        required=False,
-        widget=CustomClearableFileInput,
-        help_text="Max 2MB. JPG or PNG only.",
+class ProductSearchForm(forms.Form):
+    q = forms.CharField(
+        required=False, widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Search bikes, parts, gear...',
+                'autocomplete': 'off',
+            }
+        )
     )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields["category"].queryset = Category.objects.active().only("id")
+    category = forms.CharField(required=False, widget=forms.HiddenInput())
+    min_price = forms.DecimalField(
+        required=False, min_value=0, widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control', 
+                'placeholder': 'Min $'
+            }
+        )
+    )
+    max_price = forms.DecimalField(
+        required=False, min_value=0, widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control', 'placeholder': 'Max $'
+            }
+        )
+    )
+    brand = forms.CharField(required=False, widget=forms.HiddenInput())
+    bike_type = forms.CharField(required=False, widget=forms.HiddenInput())
 
-        base_attrs = {"class": "form-control rounded-1"}
-        for field in self.fields.values():
-            field.widget.attrs.update(base_attrs)
+    SORT_CHOICES = [
+        ('', 'Relevance'),
+        ('price_asc', 'Price: Low to High'),
+        ('price_desc', 'Price: High to Low'),
+        ('newest', 'Newest'),
+        ('rating', 'Top Rated'),
+        ('popular', 'Most Popular'),
+    ]
+    sort = forms.ChoiceField(
+        choices=SORT_CHOICES, required=False, widget=forms.Select(
+            attrs={
+                'class': 'form-select form-select-sm'
+            }
+        )
+    )
 
-    def clean_image(self):
-        image = self.cleaned_data.get("image")
-        if image:
-            if image.size > 2 * 1024 * 1024:
-                raise forms.ValidationError("Image too large (max 2MB)")
-            if not image.name.lower().endswith((".jpg", ".jpeg", ".png")):
-                raise forms.ValidationError("Only JPG/PNG images allowed")
-        return image
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'title', 'body']
+        widgets = {
+            'rating': forms.Select(choices=[(i, f'{i} Star{"s" if i > 1 else ""}') for i in range(1, 6)],
+                                   attrs={'class': 'form-select'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Review title'}),
+            'body': forms.Textarea(attrs={'class': 'form-control', 'rows': 4,
+                                          'placeholder': 'Share your experience...'}),
+        }

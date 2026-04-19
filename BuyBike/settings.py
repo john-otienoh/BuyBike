@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     # Local Apps
     "home.apps.HomeConfig",
-    # "products.apps.ProductsConfig",
+    "products.apps.ProductsConfig",
     # "cart.apps.CartConfig",
     # "account.apps.AccountConfig",
     # "orders.apps.OrdersConfig",
