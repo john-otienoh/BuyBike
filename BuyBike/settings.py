@@ -41,9 +41,13 @@ INSTALLED_APPS = [
     # Local Apps
     "home.apps.HomeConfig",
     "products.apps.ProductsConfig",
-    # "cart.apps.CartConfig",
-    # "account.apps.AccountConfig",
-    # "orders.apps.OrdersConfig",
+    "cart.apps.CartConfig",
+    "account.apps.AccountConfig",
+    "orders.apps.OrdersConfig",
+    "newsletter.apps.NewsletterConfig",
+    "promotions.apps.PromotionsConfig",
+    "wishlist.apps.WishlistConfig",
+
     # Third Party Apps
     "crispy_forms",
     "crispy_bootstrap5",

@@ -1,19 +1,16 @@
 """Product Views"""
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 from django.contrib import messages
-from django.http import JsonResponse
-from django.db import transaction
-from django.db.models import Q, Avg, Count
-from django.utils import timezone
+from django.db.models import Q, Avg
 from django.core.paginator import Paginator
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
-from .models import Brand, Category, Product
-from .forms import ProductSearchForm
+from .models import Brand, Category, Product, Review
+from wishlist.models import Wishlist
+from .forms import ProductSearchForm, ReviewForm
+from orders.models import Order
 # Create your views here.
 
 class ProductListView(View):

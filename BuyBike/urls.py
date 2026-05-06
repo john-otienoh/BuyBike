@@ -20,17 +20,18 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+admin.site.site_header = "BuyBike Admin"
+admin.site.site_title = "BuyBike"
+admin.site.index_title = "BuyBike Management"
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # path('accounts/', include('allauth.urls')),
-    # path("accounts/", include("account.urls")),
+    path("accounts/", include("account.urls")),
     path("", include("home.urls", namespace='home')),
     path("products/", include("products.urls", namespace='products')),
     path("cart/", include("cart.urls", namespace="cart")),
-    # path('orders/',include('orders.urls', namespace='orders')),
-    # path('checkout/', include('checkout.urls')),
-    # path('profile/', include('profiles.urls')),
-    # path('contact/', include('contact.urls')),
-    # path('review/', include('reviews.urls')),
-    # path('newsletter/', include('newsletter.urls')),
+    path('orders/',include('orders.urls', namespace='orders')),
+    path('promotions/', include('promotions.urls', namespace='promotions')),
+    path('wishlist/', include('wislist.urls', namespace='wishlist')),
+    path('newsletter/', include('newsletter.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

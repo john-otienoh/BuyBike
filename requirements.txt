@@ -19,4 +19,4 @@ sqlparse==0.5.3
 stripe==12.1.0
 dj-rest-auth==7.0.0
 Django==5.1.1
-django-allauth==65.10.0
+# https://www.reddit.com/answers/b66d8d44-3032-4904-a7d0-3335c33c0f5f/?q=data+analysis+capstone+project+examples&source=SERP&upstreamCID=0d399b3a-1bbc-41c8-a529-222c2829d27d&upstreamIID=c37e7774-be18-474f-9faa-9492168899de&upstreamQ=data+analysis+capstone+project+examples&upstreamQID=96edfe59-36e1-4577-a9f2-4cdbd2e02fc8

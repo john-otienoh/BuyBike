@@ -37,38 +37,7 @@ class RegisterForm(UserCreationForm):
             raise forms.ValidationError("An account with this email already exists.")
         return email
 
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(
-        max_length=100,
-        required=True,
-        widget=forms.TextInput(
-            attrs={
-                "placeholder": "Username",
-                "class": "form-control",
-            }
-        ),
-    )
-    password = forms.CharField(
-        max_length=50,
-        required=True,
-        widget=forms.PasswordInput(
-            attrs={
-                "placeholder": "Password",
-                "class": "form-control",
-                "data-toggle": "password",
-                "id": "password",
-                "name": "password",
-            }
-        ),
-    )
-    remember_me = forms.BooleanField(required=False)
-
-    class Meta:
-        model = User
-        fields = ["username", "password", "remember_me"]
-
-
-class UpdateUserForm(forms.ModelForm):
+class LoginForm(forms.Form):
     username_or_email = forms.CharField(
         label='Username or Email',
         widget=forms.TextInput(attrs={

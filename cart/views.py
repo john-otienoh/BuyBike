@@ -1,18 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
-from django.contrib.auth import login, logout, authenticate, update_session_auth_hash
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.http import JsonResponse
-from django.db import transaction
-from django.db.models import Q, Avg, Count
-from django.utils import timezone
-from django.conf import settings
 from .context_processors import get_or_create_cart
-from products.models import Product
-from .models import CartItem, Cart
+from products.models import Product, ProductVariant
+from .models import CartItem
+from promotions.models import Coupon
 
 class CartView(View):
     def get(self):
@@ -37,7 +30,7 @@ class CartView(View):
                     coupon = None
             except Coupon.DoesNotExist:
                 del request.session['coupon_code']
-        return render(request, 'store/cart.html', {
+        return render(request, 'cart/cart.html', {
             'cart': cart,
             'items': items,
             'coupon': coupon,
@@ -53,6 +46,8 @@ class AddToCartView(View):
         quantity = int(request.POST.get('quantity', 1))
         variant_id = request.POST.get('variant_id')
         variant = None
+        if variant_id:
+            variant = get_object_or_404(ProductVariant, pk=variant_id, product=product)
 
         if quantity < 1:
             quantity = 1
@@ -103,6 +98,16 @@ class UpdateCartView(View):
                 'subtotal': str(cart.subtotal),
             })
         return redirect('cart:cart')
+
+class RemoveFromCart(View):
+    def post(self, request, item_id):
+        item = get_object_or_404(CartItem, pk=item_id)
+        cart = get_or_create_cart(request)
+        if item.cart == cart:
+            item.delete()
+            messages.success(request, 'Item removed from cart')
+        return redirect('cart:cart')
+
 class ApplyCouponView(View):
     def post(self, request):
         code = request.POST.get('coupon_code', '').strip().upper()
